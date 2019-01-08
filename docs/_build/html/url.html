@@ -1,0 +1,346 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>URL Model &mdash; URL  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Normalizer" href="normalizer.html" />
+    <link rel="prev" title="Requirements and Installation" href="requirements-and-installation.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> URL
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">First Steps</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="requirements-and-installation.html">Requirements and Installation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Usage</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">URL Model</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#creating-a-url">Creating a URL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#component-access">Component Access</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#component-modification">Component Modification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#non-optional-normalization">Non-Optional Normalization</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="normalizer.html">Normalizer</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Normalization Details</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="applying-multiple-normalizations.html">Applying Multiple Normalizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="semantically-lossless-normalizations.html">Semantically-Lossless Normalizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="potentially-lossy-normalizations.html">Potentially-Lossy Normalizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lossy-normalizations.html">Lossy Normalizations</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">URL</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>URL Model</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/url.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="url-model">
+<h1>URL Model<a class="headerlink" href="#url-model" title="Permalink to this headline">¶</a></h1>
+<p>A <code class="docutils literal notranslate"><span class="pre">Url</span></code> models a <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Glossary/URL">URL</a>, providing component access
+and modification through the <a class="reference external" href="https://www.php-fig.org/psr/psr-7/#35-psrhttpmessageuriinterface">PSR7 UriInterface</a>.</p>
+<p class="precede-list">Minimal non-optional RFC 3986 normalization is applied by default:</p>
+<ul class="simple">
+<li>converts scheme to lowercase</li>
+<li>converts host to lowercase</li>
+<li>removes the default port</li>
+</ul>
+<div class="section" id="creating-a-url">
+<h2>Creating a URL<a class="headerlink" href="#creating-a-url" title="Permalink to this headline">¶</a></h2>
+<p>A new <code class="docutils literal notranslate"><span class="pre">Url</span></code> instance is created by passing a URL string to the constructor:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="k">use</span> <span class="nx">webignition\Url\Url</span><span class="p">;</span>
+
+<span class="nv">$url</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Url</span><span class="p">(</span><span class="s1">&#39;https://example.com&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="component-access">
+<h2>Component Access<a class="headerlink" href="#component-access" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="k">use</span> <span class="nx">webignition\Url\Url</span><span class="p">;</span>
+
+<span class="nv">$url</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Url</span><span class="p">(</span><span class="s1">&#39;https://user:password@example.com:8080/path?query#fragment&#39;</span><span class="p">);</span>
+
+<span class="nv">$url</span><span class="o">-&gt;</span><span class="na">getScheme</span><span class="p">();</span>
+<span class="c1">// &quot;https&quot;</span>
+
+<span class="nv">$url</span><span class="o">-&gt;</span><span class="na">getUserInfo</span><span class="p">();</span>
+<span class="c1">// &quot;user:password&quot;</span>
+
+<span class="nv">$url</span><span class="o">-&gt;</span><span class="na">getHost</span><span class="p">();</span>
+<span class="c1">// &quot;example.com&quot;</span>
+
+<span class="nv">$url</span><span class="o">-&gt;</span><span class="na">getPort</span><span class="p">();</span>
+<span class="c1">// 8080</span>
+
+<span class="nv">$url</span><span class="o">-&gt;</span><span class="na">getAuthority</span><span class="p">();</span>
+<span class="c1">// &quot;user:password@example.com:8080&quot;</span>
+
+<span class="nv">$url</span><span class="o">-&gt;</span><span class="na">getPath</span><span class="p">();</span>
+<span class="c1">// &quot;/path&quot;</span>
+
+<span class="nv">$url</span><span class="o">-&gt;</span><span class="na">getQuery</span><span class="p">();</span>
+<span class="c1">// &quot;query&quot;</span>
+
+<span class="nv">$url</span><span class="o">-&gt;</span><span class="na">getFragment</span><span class="p">();</span>
+<span class="c1">// &quot;fragment&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="component-modification">
+<h2>Component Modification<a class="headerlink" href="#component-modification" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">Url::with*()</span></code> are used to set components. A <code class="docutils literal notranslate"><span class="pre">Url</span></code> is immutable. The return value is a new <code class="docutils literal notranslate"><span class="pre">Url</span></code> instance.</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="k">use</span> <span class="nx">webignition\Url\Url</span><span class="p">;</span>
+
+<span class="nv">$url</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Url</span><span class="p">(</span><span class="s1">&#39;https://user:password@example.com:8080/path?query#fragment&#39;</span><span class="p">);</span>
+<span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="nv">$url</span><span class="p">;</span>
+<span class="c1">// &quot;https://user:password@example.com:8080/path?query#fragment&quot;</span>
+
+<span class="nv">$url</span> <span class="o">=</span> <span class="nv">$url</span><span class="o">-&gt;</span><span class="na">withScheme</span><span class="p">(</span><span class="s1">&#39;http&#39;</span><span class="p">);</span>
+<span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="nv">$modifiedUrl</span><span class="p">;</span>
+<span class="c1">// &quot;http://user:password@example.com:8080/path?query#fragment&quot;</span>
+
+<span class="nv">$url</span> <span class="o">=</span> <span class="nv">$url</span><span class="o">-&gt;</span><span class="na">withUserInfo</span><span class="p">(</span><span class="s1">&#39;new-user&#39;</span><span class="p">,</span> <span class="s1">&#39;new-password&#39;</span><span class="p">);</span>
+<span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="nv">$modifiedUrl</span><span class="p">;</span>
+<span class="c1">// &quot;http://new-user:new-password@example.com:8080/path?query#fragment&quot;</span>
+
+<span class="nv">$url</span> <span class="o">=</span> <span class="nv">$url</span><span class="o">-&gt;</span><span class="na">withUserInfo</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
+<span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="nv">$modifiedUrl</span><span class="p">;</span>
+<span class="c1">// &quot;http://example.com:8080/path?query#fragment&quot;</span>
+
+<span class="nv">$url</span> <span class="o">=</span> <span class="nv">$url</span><span class="o">-&gt;</span><span class="na">withHost</span><span class="p">(</span><span class="s1">&#39;new.example.com&#39;</span><span class="p">);</span>
+<span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="nv">$modifiedUrl</span><span class="p">;</span>
+<span class="c1">// &quot;http://new.example.com:8080/path?query#fragment&quot;</span>
+
+<span class="nv">$url</span> <span class="o">=</span> <span class="nv">$url</span><span class="o">-&gt;</span><span class="na">withPort</span><span class="p">(</span><span class="k">null</span><span class="p">);</span>
+<span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="nv">$modifiedUrl</span><span class="p">;</span>
+<span class="c1">// &quot;http://new.example.com/path?query#fragment&quot;</span>
+
+<span class="nv">$url</span> <span class="o">=</span> <span class="nv">$url</span><span class="o">-&gt;</span><span class="na">withPath</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
+<span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="nv">$modifiedUrl</span><span class="p">;</span>
+<span class="c1">// &quot;http://new.example.com?query#fragment&quot;</span>
+
+<span class="nv">$url</span> <span class="o">=</span> <span class="nv">$url</span><span class="o">-&gt;</span><span class="na">withQuery</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
+<span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="nv">$modifiedUrl</span><span class="p">;</span>
+<span class="c1">// &quot;http://new.example.com#fragment&quot;</span>
+
+<span class="nv">$url</span> <span class="o">=</span> <span class="nv">$url</span><span class="o">-&gt;</span><span class="na">withFragment</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
+<span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="nv">$modifiedUrl</span><span class="p">;</span>
+<span class="c1">// &quot;http://new.example.com&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="non-optional-normalization">
+<h2>Non-Optional Normalization<a class="headerlink" href="#non-optional-normalization" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="k">use</span> <span class="nx">webignition\Url\Url</span><span class="p">;</span>
+
+<span class="nv">$url</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Url</span><span class="p">(</span><span class="s1">&#39;HTTPS://EXAMPLE.com:443&#39;</span><span class="p">);</span>
+
+<span class="nv">$url</span><span class="o">-&gt;</span><span class="na">getScheme</span><span class="p">();</span>
+<span class="c1">// &quot;https&quot;</span>
+
+<span class="nv">$url</span><span class="o">-&gt;</span><span class="na">getHost</span><span class="p">();</span>
+<span class="c1">// &quot;example.com&quot;</span>
+
+<span class="nv">$url</span><span class="o">-&gt;</span><span class="na">getPort</span><span class="p">();</span>
+<span class="c1">// null</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="normalizer.html" class="btn btn-neutral float-right" title="Normalizer" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="requirements-and-installation.html" class="btn btn-neutral" title="Requirements and Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Jon Cram
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

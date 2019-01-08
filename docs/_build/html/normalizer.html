@@ -1,0 +1,543 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Normalizer &mdash; URL  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Applying Multiple Normalizations" href="applying-multiple-normalizations.html" />
+    <link rel="prev" title="URL Model" href="url.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> URL
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">First Steps</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="requirements-and-installation.html">Requirements and Installation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Usage</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="url.html">URL Model</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Normalizer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#capitalize-percent-encoding">Capitalize Percent Encoding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#decode-unreserved-characters">Decode Unreserved Characters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#convert-empty-http-path">Convert Empty HTTP Path</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#remove-default-file-host">Remove Default File Host</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#remove-default-port">Remove Default Port</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#remove-path-dot-segments">Remove Path Dot Segments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#convert-host-unicode-to-punycode">Convert Host Unicode to Punycode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#reduce-duplicate-path-slashes">Reduce Duplicate Path Slashes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sort-query-parameters">Sort Query Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#add-path-trailing-slash">Add Path Trailing Slash</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#remove-user-info">Remove User Info</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#remove-fragment">Remove Fragment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#remove-www-sub-domain">Remove www Sub-domain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#specify-a-default-scheme">Specify a Default Scheme</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#remove-filenames-from-path-by-pattern">Remove Filenames From Path By Pattern</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#remove-query-parameters-by-pattern">Remove Query Parameters By Pattern</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Normalization Details</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="applying-multiple-normalizations.html">Applying Multiple Normalizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="semantically-lossless-normalizations.html">Semantically-Lossless Normalizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="potentially-lossy-normalizations.html">Potentially-Lossy Normalizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lossy-normalizations.html">Lossy Normalizations</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">URL</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Normalizer</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/normalizer.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="normalizer">
+<h1>Normalizer<a class="headerlink" href="#normalizer" title="Permalink to this headline">¶</a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">Normalizer</span></code> can apply any combination of sixteen normalizations to any <code class="docutils literal notranslate"><span class="pre">UriInterface</span></code> implementation.</p>
+<p>Normalizations are specified through either <cite>flags</cite> or <cite>options</cite>. Flags are for normalizations that can be turned or
+turned off (you either want it or you don’t). Options are for normalizations that act on one or more variables that
+you get to choose.</p>
+<p class="precede-list">Flags:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#normalizations-capitalize-percent-encoding"><span class="std std-ref">capitalize percent encoding</span></a></li>
+<li><a class="reference internal" href="#normalizations-decode-unreserved-characters"><span class="std std-ref">decode unreserved characters</span></a></li>
+<li><a class="reference internal" href="#normalizations-convert-empty-http-path"><span class="std std-ref">convert empty http path</span></a></li>
+<li><a class="reference internal" href="#normalizations-remove-default-file-host"><span class="std std-ref">remove default file host</span></a></li>
+<li><a class="reference internal" href="#normalizations-remove-default-port"><span class="std std-ref">remove port host</span></a></li>
+<li><a class="reference internal" href="#normalizations-remove-path-dot-segments"><span class="std std-ref">remove path dot segments</span></a></li>
+<li><a class="reference internal" href="#normalizations-convert-host-unicode-to-punycode"><span class="std std-ref">convert host unicode to punycode</span></a></li>
+<li><a class="reference internal" href="#normalizations-reduce-duplicate-path-slashes"><span class="std std-ref">reduce duplicate path slashes</span></a></li>
+<li><a class="reference internal" href="#normalizations-sort-query-parameters"><span class="std std-ref">sort query parameters</span></a></li>
+<li><a class="reference internal" href="#normalizations-add-path-trailing-slash"><span class="std std-ref">add path trailing slash</span></a>-</li>
+<li><a class="reference internal" href="#normalizations-remove-user-info"><span class="std std-ref">remove user info</span></a></li>
+<li><a class="reference internal" href="#normalizations-remove-fragment"><span class="std std-ref">remove fragment</span></a></li>
+<li><a class="reference internal" href="#normalizations-remove-www"><span class="std std-ref">remove www sub-domain</span></a></li>
+</ul>
+<p class="precede-list">Options:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#normalizations-default-scheme"><span class="std std-ref">specify a default scheme</span></a></li>
+<li><a class="reference internal" href="#normalizations-remove-filenames-from-path-by-pattern"><span class="std std-ref">remove filenames from path by pattern</span></a></li>
+<li><a class="reference internal" href="#normalizations-remove-query-parameters-by-pattern"><span class="std std-ref">remove query parameters by pattern</span></a></li>
+</ul>
+<div class="section" id="capitalize-percent-encoding">
+<span id="normalizations-capitalize-percent-encoding"></span><h2>Capitalize Percent Encoding<a class="headerlink" href="#capitalize-percent-encoding" title="Permalink to this headline">¶</a></h2>
+<p>Convert percent-encoded triplets (such as <code class="docutils literal notranslate"><span class="pre">%3A</span></code>) to uppercase. Letters within a percent-encoded triplet are
+case-insensitive.</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="k">use</span> <span class="nx">webignition\Url\Normalizer</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">webignition\Url\Url</span><span class="p">;</span>
+
+<span class="nv">$url</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Url</span><span class="p">(</span><span class="s1">&#39;http://example.com/path%2fvalue&#39;</span><span class="p">);</span>
+<span class="nv">$normalizedUrl</span> <span class="o">=</span> <span class="nx">Normalizer</span><span class="o">::</span><span class="na">normalize</span><span class="p">(</span><span class="nv">$url</span><span class="p">,</span> <span class="nx">Normalizer</span><span class="o">::</span><span class="na">CAPITALIZE_PERCENT_ENCODING</span><span class="p">);</span>
+
+<span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="nv">$normalizedUrl</span><span class="p">;</span>
+<span class="c1">// &quot;http://example.com/path%2Fvalue&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="decode-unreserved-characters">
+<span id="normalizations-decode-unreserved-characters"></span><h2>Decode Unreserved Characters<a class="headerlink" href="#decode-unreserved-characters" title="Permalink to this headline">¶</a></h2>
+<p>Convert percent-encoded characters that have no special meaning to their unencoded equivalents.</p>
+<p>Decodes encoded forms of: <code class="docutils literal notranslate"><span class="pre">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~</span></code></p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="k">use</span> <span class="nx">webignition\Url\Normalizer</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">webignition\Url\Url</span><span class="p">;</span>
+
+<span class="nv">$url</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Url</span><span class="p">(</span><span class="s1">&#39;http://example.com/%75%72%6C&#39;</span><span class="p">);</span>
+<span class="nv">$normalizedUrl</span> <span class="o">=</span> <span class="nx">Normalizer</span><span class="o">::</span><span class="na">normalize</span><span class="p">(</span><span class="nv">$url</span><span class="p">,</span> <span class="nx">Normalizer</span><span class="o">::</span><span class="na">DECODE_UNRESERVED_CHARACTERS</span><span class="p">);</span>
+
+<span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="nv">$normalizedUrl</span><span class="p">;</span>
+<span class="c1">// &quot;http://example.com/url&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="convert-empty-http-path">
+<span id="normalizations-convert-empty-http-path"></span><h2>Convert Empty HTTP Path<a class="headerlink" href="#convert-empty-http-path" title="Permalink to this headline">¶</a></h2>
+<p>Applies a path of <code class="docutils literal notranslate"><span class="pre">/</span></code> where the path is empty and the scheme is <code class="docutils literal notranslate"><span class="pre">http</span></code> or <code class="docutils literal notranslate"><span class="pre">https</span></code>.</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="k">use</span> <span class="nx">webignition\Url\Normalizer</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">webignition\Url\Url</span><span class="p">;</span>
+
+<span class="nv">$url</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Url</span><span class="p">(</span><span class="s1">&#39;http://example.com&#39;</span><span class="p">);</span>
+<span class="nv">$normalizedUrl</span> <span class="o">=</span> <span class="nx">Normalizer</span><span class="o">::</span><span class="na">normalize</span><span class="p">(</span><span class="nv">$url</span><span class="p">,</span> <span class="nx">Normalizer</span><span class="o">::</span><span class="na">CONVERT_EMPTY_HTTP_PATH</span><span class="p">);</span>
+
+<span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="nv">$normalizedUrl</span><span class="p">;</span>
+<span class="c1">// &quot;http://example.com/&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="remove-default-file-host">
+<span id="normalizations-remove-default-file-host"></span><h2>Remove Default File Host<a class="headerlink" href="#remove-default-file-host" title="Permalink to this headline">¶</a></h2>
+<p>Removes the host of <code class="docutils literal notranslate"><span class="pre">localhost</span></code> from a <code class="docutils literal notranslate"><span class="pre">file://</span></code> url.</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="k">use</span> <span class="nx">webignition\Url\Normalizer</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">webignition\Url\Url</span><span class="p">;</span>
+
+<span class="nv">$url</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Url</span><span class="p">(</span><span class="s1">&#39;file://localhost/path&#39;</span><span class="p">);</span>
+<span class="nv">$normalizedUrl</span> <span class="o">=</span> <span class="nx">Normalizer</span><span class="o">::</span><span class="na">normalize</span><span class="p">(</span><span class="nv">$url</span><span class="p">,</span> <span class="nx">Normalizer</span><span class="o">::</span><span class="na">REMOVE_DEFAULT_FILE_HOST</span><span class="p">);</span>
+
+<span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="nv">$normalizedUrl</span><span class="p">;</span>
+<span class="c1">// &quot;file:///path&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="remove-default-port">
+<span id="normalizations-remove-default-port"></span><h2>Remove Default Port<a class="headerlink" href="#remove-default-port" title="Permalink to this headline">¶</a></h2>
+<p>Removes the port if it matches the default port for the scheme.</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="k">use</span> <span class="nx">webignition\Url\Normalizer</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">webignition\Url\Url</span><span class="p">;</span>
+
+<span class="nv">$url</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Url</span><span class="p">(</span><span class="s1">&#39;http://example.com:80&#39;</span><span class="p">);</span>
+<span class="nv">$normalizedUrl</span> <span class="o">=</span> <span class="nx">Normalizer</span><span class="o">::</span><span class="na">normalize</span><span class="p">(</span><span class="nv">$url</span><span class="p">,</span> <span class="nx">Normalizer</span><span class="o">::</span><span class="na">REMOVE_DEFAULT_PORT</span><span class="p">);</span>
+
+<span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="nv">$normalizedUrl</span><span class="p">;</span>
+<span class="c1">// &quot;http://example.com&quot;</span>
+
+<span class="nv">$url</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Url</span><span class="p">(</span><span class="s1">&#39;https://example.com:443&#39;</span><span class="p">);</span>
+<span class="nv">$normalizedUrl</span> <span class="o">=</span> <span class="nx">Normalizer</span><span class="o">::</span><span class="na">normalize</span><span class="p">(</span><span class="nv">$url</span><span class="p">,</span> <span class="nx">Normalizer</span><span class="o">::</span><span class="na">REMOVE_DEFAULT_PORT</span><span class="p">);</span>
+<span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="nv">$normalizedUrl</span><span class="p">;</span>
+<span class="c1">// &quot;https://example.com&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="remove-path-dot-segments">
+<span id="normalizations-remove-path-dot-segments"></span><h2>Remove Path Dot Segments<a class="headerlink" href="#remove-path-dot-segments" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">.</span></code> and <code class="docutils literal notranslate"><span class="pre">..</span></code> path segments have a special meaning. These segments are removed and the path
+is re-written to be equivalent.</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="k">use</span> <span class="nx">webignition\Url\Normalizer</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">webignition\Url\Url</span><span class="p">;</span>
+
+<span class="nv">$url</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Url</span><span class="p">(</span><span class="s1">&#39;http://example.com/a/b/c/./../../g&#39;</span><span class="p">);</span>
+<span class="nv">$normalizedUrl</span> <span class="o">=</span> <span class="nx">Normalizer</span><span class="o">::</span><span class="na">normalize</span><span class="p">(</span><span class="nv">$url</span><span class="p">,</span> <span class="nx">Normalizer</span><span class="o">::</span><span class="na">REMOVE_PATH_DOT_SEGMENTS</span><span class="p">);</span>
+
+<span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="nv">$normalizedUrl</span><span class="p">;</span>
+<span class="c1">// &quot;http://example.com/a/g&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="convert-host-unicode-to-punycode">
+<span id="normalizations-convert-host-unicode-to-punycode"></span><h2>Convert Host Unicode to Punycode<a class="headerlink" href="#convert-host-unicode-to-punycode" title="Permalink to this headline">¶</a></h2>
+<p>Unicode hosts containing non-ascii characters are converted to the
+<a class="reference external" href="https://en.wikipedia.org/wiki/Punycode">punycode</a> equivalent.</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="k">use</span> <span class="nx">webignition\Url\Normalizer</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">webignition\Url\Url</span><span class="p">;</span>
+
+<span class="nv">$url</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Url</span><span class="p">(</span><span class="s1">&#39;http://♥.example.com/&#39;</span><span class="p">);</span>
+<span class="nv">$normalizedUrl</span> <span class="o">=</span> <span class="nx">Normalizer</span><span class="o">::</span><span class="na">normalize</span><span class="p">(</span><span class="nv">$url</span><span class="p">,</span> <span class="nx">Normalizer</span><span class="o">::</span><span class="na">CONVERT_HOST_UNICODE_TO_PUNYCODE</span><span class="p">);</span>
+
+<span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="nv">$normalizedUrl</span><span class="p">;</span>
+<span class="c1">// &quot;http://xn--g6h.example.com/&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="reduce-duplicate-path-slashes">
+<span id="normalizations-reduce-duplicate-path-slashes"></span><h2>Reduce Duplicate Path Slashes<a class="headerlink" href="#reduce-duplicate-path-slashes" title="Permalink to this headline">¶</a></h2>
+<p>Reduces occurrences of multiple slashes in the path to single slashes.</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="k">use</span> <span class="nx">webignition\Url\Normalizer</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">webignition\Url\Url</span><span class="p">;</span>
+
+<span class="nv">$url</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Url</span><span class="p">(</span><span class="s1">&#39;http://example.com///path//&#39;</span><span class="p">);</span>
+<span class="nv">$normalizedUrl</span> <span class="o">=</span> <span class="nx">Normalizer</span><span class="o">::</span><span class="na">normalize</span><span class="p">(</span><span class="nv">$url</span><span class="p">,</span> <span class="nx">Normalizer</span><span class="o">::</span><span class="na">REDUCE_DUPLICATE_PATH_SLASHES</span><span class="p">);</span>
+
+<span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="nv">$normalizedUrl</span><span class="p">;</span>
+<span class="c1">// &quot;http://example.com/path/&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="sort-query-parameters">
+<span id="normalizations-sort-query-parameters"></span><h2>Sort Query Parameters<a class="headerlink" href="#sort-query-parameters" title="Permalink to this headline">¶</a></h2>
+<p>Alphabetically sorts query parameters by key.</p>
+<p>Sorting is neither locale- nor unicode-aware. The purpose is to be able to compare URLs in a reproducible way.</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="k">use</span> <span class="nx">webignition\Url\Normalizer</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">webignition\Url\Url</span><span class="p">;</span>
+
+<span class="nv">$url</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Url</span><span class="p">(</span><span class="s1">&#39;http://example.com?c=cow&amp;a=apple&amp;b=bear&#39;</span><span class="p">);</span>
+<span class="nv">$normalizedUrl</span> <span class="o">=</span> <span class="nx">Normalizer</span><span class="o">::</span><span class="na">normalize</span><span class="p">(</span><span class="nv">$url</span><span class="p">,</span> <span class="nx">Normalizer</span><span class="o">::</span><span class="na">SORT_QUERY_PARAMETERS</span><span class="p">);</span>
+
+<span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="nv">$normalizedUrl</span><span class="p">;</span>
+<span class="c1">// &quot;http://example.com?a=apple&amp;b=bear&amp;c=cow&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="add-path-trailing-slash">
+<span id="normalizations-add-path-trailing-slash"></span><h2>Add Path Trailing Slash<a class="headerlink" href="#add-path-trailing-slash" title="Permalink to this headline">¶</a></h2>
+<p>Add a trailing slash to the path if not present.</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="k">use</span> <span class="nx">webignition\Url\Normalizer</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">webignition\Url\Url</span><span class="p">;</span>
+
+<span class="nv">$url</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Url</span><span class="p">(</span><span class="s1">&#39;http://example.com&#39;</span><span class="p">);</span>
+<span class="nv">$normalizedUrl</span> <span class="o">=</span> <span class="nx">Normalizer</span><span class="o">::</span><span class="na">normalize</span><span class="p">(</span><span class="nv">$url</span><span class="p">,</span> <span class="nx">Normalizer</span><span class="o">::</span><span class="na">ADD_PATH_TRAILING_SLASH</span><span class="p">);</span>
+
+<span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="nv">$normalizedUrl</span><span class="p">;</span>
+<span class="c1">// &quot;http://example.com/&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="remove-user-info">
+<span id="normalizations-remove-user-info"></span><h2>Remove User Info<a class="headerlink" href="#remove-user-info" title="Permalink to this headline">¶</a></h2>
+<p>Remove user credentials.</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="k">use</span> <span class="nx">webignition\Url\Normalizer</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">webignition\Url\Url</span><span class="p">;</span>
+
+<span class="nv">$url</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Url</span><span class="p">(</span><span class="s1">&#39;http://user:password@example.com&#39;</span><span class="p">);</span>
+<span class="nv">$normalizedUrl</span> <span class="o">=</span> <span class="nx">Normalizer</span><span class="o">::</span><span class="na">normalize</span><span class="p">(</span><span class="nv">$url</span><span class="p">,</span> <span class="nx">Normalizer</span><span class="o">::</span><span class="na">REMOVE_USER_INFO</span><span class="p">);</span>
+
+<span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="nv">$normalizedUrl</span><span class="p">;</span>
+<span class="c1">// &quot;http://example.com&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="remove-fragment">
+<span id="normalizations-remove-fragment"></span><h2>Remove Fragment<a class="headerlink" href="#remove-fragment" title="Permalink to this headline">¶</a></h2>
+<p>Remove fragment component.</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="k">use</span> <span class="nx">webignition\Url\Normalizer</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">webignition\Url\Url</span><span class="p">;</span>
+
+<span class="nv">$url</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Url</span><span class="p">(</span><span class="s1">&#39;http://example.com#fragment&#39;</span><span class="p">);</span>
+<span class="nv">$normalizedUrl</span> <span class="o">=</span> <span class="nx">Normalizer</span><span class="o">::</span><span class="na">normalize</span><span class="p">(</span><span class="nv">$url</span><span class="p">,</span> <span class="nx">Normalizer</span><span class="o">::</span><span class="na">REMOVE_FRAGMENT</span><span class="p">);</span>
+
+<span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="nv">$normalizedUrl</span><span class="p">;</span>
+<span class="c1">// &quot;http://example.com&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="remove-www-sub-domain">
+<span id="normalizations-remove-www"></span><h2>Remove www Sub-domain<a class="headerlink" href="#remove-www-sub-domain" title="Permalink to this headline">¶</a></h2>
+<p>Remove the www sub-domain.</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="k">use</span> <span class="nx">webignition\Url\Normalizer</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">webignition\Url\Url</span><span class="p">;</span>
+
+<span class="nv">$url</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Url</span><span class="p">(</span><span class="s1">&#39;http://www.example.com&#39;</span><span class="p">);</span>
+<span class="nv">$normalizedUrl</span> <span class="o">=</span> <span class="nx">Normalizer</span><span class="o">::</span><span class="na">normalize</span><span class="p">(</span><span class="nv">$url</span><span class="p">,</span> <span class="nx">Normalizer</span><span class="o">::</span><span class="na">REMOVE_WWW</span><span class="p">);</span>
+
+<span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="nv">$normalizedUrl</span><span class="p">;</span>
+<span class="c1">// &quot;http://example.com&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="specify-a-default-scheme">
+<span id="normalizations-default-scheme"></span><h2>Specify a Default Scheme<a class="headerlink" href="#specify-a-default-scheme" title="Permalink to this headline">¶</a></h2>
+<p>Specify a default scheme to be applied if none is present.</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="k">use</span> <span class="nx">webignition\Url\Normalizer</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">webignition\Url\Url</span><span class="p">;</span>
+
+<span class="nv">$url</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Url</span><span class="p">(</span><span class="s1">&#39;//www.example.com&#39;</span><span class="p">);</span>
+<span class="nv">$normalizedUrl</span> <span class="o">=</span> <span class="nx">Normalizer</span><span class="o">::</span><span class="na">normalize</span><span class="p">(</span><span class="nv">$url</span><span class="p">,</span> <span class="nx">Normalizer</span><span class="o">::</span><span class="na">NONE</span><span class="p">,</span> <span class="p">[</span>
+    <span class="nx">Normalizer</span><span class="o">::</span><span class="na">OPTION_DEFAULT_SCHEME</span> <span class="o">=&gt;</span> <span class="s1">&#39;http&#39;</span><span class="p">,</span>
+<span class="p">]);</span>
+
+<span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="nv">$normalizedUrl</span><span class="p">;</span>
+<span class="c1">// &quot;http://example.com&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="remove-filenames-from-path-by-pattern">
+<span id="normalizations-remove-filenames-from-path-by-pattern"></span><h2>Remove Filenames From Path By Pattern<a class="headerlink" href="#remove-filenames-from-path-by-pattern" title="Permalink to this headline">¶</a></h2>
+<p>Remove the filename from the path component. Removal is defined through one or more patterns.</p>
+<p>Useful for stripping common default filenames such as <code class="docutils literal notranslate"><span class="pre">index.html</span></code>, <code class="docutils literal notranslate"><span class="pre">index.js</span></code> or <code class="docutils literal notranslate"><span class="pre">default.asp</span></code>.</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="k">use</span> <span class="nx">webignition\Url\Normalizer</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">webignition\Url\Url</span><span class="p">;</span>
+
+<span class="nv">$url</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Url</span><span class="p">(</span><span class="s1">&#39;http//www.example.com/index.html&#39;</span><span class="p">);</span>
+<span class="nv">$normalizedUrl</span> <span class="o">=</span> <span class="nx">Normalizer</span><span class="o">::</span><span class="na">normalize</span><span class="p">(</span><span class="nv">$url</span><span class="p">,</span> <span class="nx">Normalizer</span><span class="o">::</span><span class="na">NONE</span><span class="p">,</span> <span class="p">[</span>
+    <span class="nx">Normalizer</span><span class="o">::</span><span class="na">OPTION_REMOVE_PATH_FILES_PATTERNS</span> <span class="o">=&gt;</span> <span class="nx">Normalizer</span><span class="o">::</span><span class="na">REMOVE_INDEX_FILE_PATTERN</span><span class="p">,</span>
+<span class="p">]);</span>
+
+<span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="nv">$normalizedUrl</span><span class="p">;</span>
+<span class="c1">// &quot;http://example.com/&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="remove-query-parameters-by-pattern">
+<span id="normalizations-remove-query-parameters-by-pattern"></span><h2>Remove Query Parameters By Pattern<a class="headerlink" href="#remove-query-parameters-by-pattern" title="Permalink to this headline">¶</a></h2>
+<p>Remove query parameters where the parameter key matches one of a set of patterns.</p>
+<p>Useful for stripping query parameters considered by you to be irrelevant to the canonical form of a URL.</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="k">use</span> <span class="nx">webignition\Url\Normalizer</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">webignition\Url\Url</span><span class="p">;</span>
+
+<span class="nv">$url</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Url</span><span class="p">(</span><span class="s1">&#39;http//www.example.com?x=1&amp;y=2&amp;utm_source=facebook&amp;utm_medium=18&#39;</span><span class="p">);</span>
+<span class="nv">$normalizedUrl</span> <span class="o">=</span> <span class="nx">Normalizer</span><span class="o">::</span><span class="na">normalize</span><span class="p">(</span><span class="nv">$url</span><span class="p">,</span> <span class="nx">Normalizer</span><span class="o">::</span><span class="na">NONE</span><span class="p">,</span> <span class="p">[</span>
+    <span class="nx">Normalizer</span><span class="o">::</span><span class="na">OPTION_REMOVE_QUERY_PARAMETERS_PATTERNS</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;/^utm_\w+/i&#39;</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+
+<span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="nv">$normalizedUrl</span><span class="p">;</span>
+<span class="c1">// &quot;http://example.com?page=1&amp;category=2&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="applying-multiple-normalizations.html" class="btn btn-neutral float-right" title="Applying Multiple Normalizations" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="url.html" class="btn btn-neutral" title="URL Model" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Jon Cram
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
