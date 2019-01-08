@@ -1,6 +1,6 @@
 <?php
 
-namespace webignition\Url;
+namespace webignition\Uri;
 
 use IpUtils\Address\IPv4;
 use IpUtils\Exception\InvalidExpressionException;

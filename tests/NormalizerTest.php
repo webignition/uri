@@ -1,9 +1,9 @@
 <?php
 
-namespace webignition\Url\Tests;
+namespace webignition\Uri\Tests;
 
-use webignition\Url\Normalizer;
-use webignition\Url\Url;
+use webignition\Uri\Normalizer;
+use webignition\Uri\Url;
 
 class NormalizerTest extends \PHPUnit\Framework\TestCase
 {

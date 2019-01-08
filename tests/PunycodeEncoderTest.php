@@ -1,8 +1,8 @@
 <?php
 
-namespace webignition\Url\Tests;
+namespace webignition\Uri\Tests;
 
-use webignition\Url\PunycodeEncoder;
+use webignition\Uri\PunycodeEncoder;
 
 class PunycodeEncoderTest extends \PHPUnit\Framework\TestCase
 {

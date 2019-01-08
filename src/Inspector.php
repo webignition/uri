@@ -1,6 +1,6 @@
 <?php
 
-namespace webignition\Url;
+namespace webignition\Uri;
 
 use IpUtils\Exception\InvalidExpressionException;
 use Psr\Http\Message\UriInterface;

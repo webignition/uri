@@ -1,8 +1,8 @@
 <?php
 
-namespace webignition\Url\Tests;
+namespace webignition\Uri\Tests;
 
-use webignition\Url\DefaultPortIdentifier;
+use webignition\Uri\DefaultPortIdentifier;
 
 class DefaultPortIdentifierTest extends \PHPUnit\Framework\TestCase
 {

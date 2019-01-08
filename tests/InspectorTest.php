@@ -1,11 +1,11 @@
 <?php
 
-namespace webignition\Url\Tests;
+namespace webignition\Uri\Tests;
 
 use IpUtils\Exception\InvalidExpressionException;
 use Psr\Http\Message\UriInterface;
-use webignition\Url\Inspector;
-use webignition\Url\Url;
+use webignition\Uri\Inspector;
+use webignition\Uri\Url;
 
 class InspectorTest extends \PHPUnit\Framework\TestCase
 {

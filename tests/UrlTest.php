@@ -1,9 +1,9 @@
 <?php
 
-namespace webignition\Url\Tests;
+namespace webignition\Uri\Tests;
 
-use webignition\Url\Filter;
-use webignition\Url\Url;
+use webignition\Uri\Filter;
+use webignition\Uri\Url;
 
 class UrlTest extends \PHPUnit\Framework\TestCase
 {

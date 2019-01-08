@@ -1,10 +1,10 @@
 <?php
 
-namespace webignition\Url\Tests;
+namespace webignition\Uri\Tests;
 
 use Psr\Http\Message\UriInterface;
-use webignition\Url\ScopeComparer;
-use webignition\Url\Url;
+use webignition\Uri\ScopeComparer;
+use webignition\Uri\Url;
 
 class ScopeComparerTest extends \PHPUnit\Framework\TestCase
 {

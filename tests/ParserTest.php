@@ -1,8 +1,8 @@
 <?php
 
-namespace webignition\Url\Tests;
+namespace webignition\Uri\Tests;
 
-use webignition\Url\Parser;
+use webignition\Uri\Parser;
 
 class ParserTest extends \PHPUnit\Framework\TestCase
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace webignition\Url\Tests;
+namespace webignition\Uri\Tests;
 
-use webignition\Url\UserInfo;
+use webignition\Uri\UserInfo;
 
 class UserInfoTest extends \PHPUnit\Framework\TestCase
 {

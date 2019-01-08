@@ -1,8 +1,8 @@
 <?php
 
-namespace webignition\Url\Tests;
+namespace webignition\Uri\Tests;
 
-use webignition\Url\Filter;
+use webignition\Uri\Filter;
 
 class FilterTest extends \PHPUnit\Framework\TestCase
 {

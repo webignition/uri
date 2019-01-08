@@ -1,9 +1,9 @@
 <?php
 
-namespace webignition\Url\Tests;
+namespace webignition\Uri\Tests;
 
 use IpUtils\Exception\InvalidExpressionException;
-use webignition\Url\Host;
+use webignition\Uri\Host;
 
 class HostTest extends \PHPUnit\Framework\TestCase
 {

@@ -13,12 +13,12 @@
     ],
     "autoload": {
         "psr-4": {
-            "webignition\\Url\\": "src"
+            "webignition\\Uri\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "webignition\\Url\\Tests\\": "tests"
+            "webignition\\Uri\\Tests\\": "tests"
         }
     },
     "scripts": {

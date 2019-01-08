@@ -1,8 +1,8 @@
 <?php
 
-namespace webignition\Url\Tests;
+namespace webignition\Uri\Tests;
 
-use webignition\Url\Path;
+use webignition\Uri\Path;
 
 class PathTest extends \PHPUnit\Framework\TestCase
 {

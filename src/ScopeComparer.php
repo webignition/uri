@@ -1,6 +1,6 @@
 <?php
 
-namespace webignition\Url;
+namespace webignition\Uri;
 
 use Psr\Http\Message\UriInterface;
 
