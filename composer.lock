@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "389800f04039675719acfb8de6f96fa4",
+    "content-hash": "fdf4571bc9fa0686ed51d72b66d8b734",
     "packages": [
         {
             "name": "mso/idna-convert",

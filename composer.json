@@ -1,8 +1,8 @@
 {
-    "name": "webignition/url",
+    "name": "webignition/uri",
     "description": "A PSR-7 UriInterface implementation. A normalizer for applying sixteen lossy and lossless normalizations.",
     "keywords": ["url", "uri", "psr-7", "normalise", "normalize", "normaliser", "normalizer"],
-    "homepage": "https://github.com/webignition/url",
+    "homepage": "https://github.com/webignition/uri",
     "type": "library",
     "license": "MIT",
     "authors": [
