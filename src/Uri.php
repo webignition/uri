@@ -4,7 +4,7 @@ namespace webignition\Uri;
 
 use Psr\Http\Message\UriInterface;
 
-class Url implements UriInterface
+class Uri implements UriInterface
 {
     /**
      * @var string
@@ -288,7 +288,7 @@ class Url implements UriInterface
     }
 
     private static function applyComponents(
-        Url $url,
+        Uri $url,
         string $scheme,
         string $userInfo,
         string $host,

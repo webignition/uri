@@ -3,7 +3,7 @@
 namespace webignition\Uri\Tests;
 
 use webignition\Uri\Normalizer;
-use webignition\Uri\Url;
+use webignition\Uri\Uri;
 
 class NormalizerTest extends \PHPUnit\Framework\TestCase
 {
@@ -39,7 +39,7 @@ class NormalizerTest extends \PHPUnit\Framework\TestCase
         int $flags = Normalizer::PRESERVING_NORMALIZATIONS,
         ?array $options = []
     ) {
-        $normalizedUrl = Normalizer::normalize(new Url($url), $flags, $options);
+        $normalizedUrl = Normalizer::normalize(new Uri($url), $flags, $options);
 
         $this->assertEquals((string) $expectedUrl, (string) $normalizedUrl);
     }
@@ -520,10 +520,10 @@ class NormalizerTest extends \PHPUnit\Framework\TestCase
 
     private function setUrlPort(string $url, int $port): string
     {
-        $urlObject = new Url($url);
+        $urlObject = new Uri($url);
 
         try {
-            $reflector = new \ReflectionClass(Url::class);
+            $reflector = new \ReflectionClass(Uri::class);
             $property = $reflector->getProperty('port');
             $property->setAccessible(true);
             $property->setValue($urlObject, $port);

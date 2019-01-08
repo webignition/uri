@@ -5,7 +5,7 @@ namespace webignition\Uri\Tests;
 use IpUtils\Exception\InvalidExpressionException;
 use Psr\Http\Message\UriInterface;
 use webignition\Uri\Inspector;
-use webignition\Uri\Url;
+use webignition\Uri\Uri;
 
 class InspectorTest extends \PHPUnit\Framework\TestCase
 {
@@ -26,27 +26,27 @@ class InspectorTest extends \PHPUnit\Framework\TestCase
     {
         return [
             'no host' => [
-                'url' => new Url('example'),
+                'url' => new Uri('example'),
                 'expectedIsPubliclyRoutable' => true,
             ],
             'host not publicly routable' => [
-                'url' => new Url('http://127.0.0.1'),
+                'url' => new Uri('http://127.0.0.1'),
                 'expectedIsPubliclyRoutable' => true,
             ],
             'host lacks dots' => [
-                'url' => new Url('http://example'),
+                'url' => new Uri('http://example'),
                 'expectedIsPubliclyRoutable' => true,
             ],
             'host starts with dot' => [
-                'url' => new Url('http://.example'),
+                'url' => new Uri('http://.example'),
                 'expectedIsPubliclyRoutable' => true,
             ],
             'host ends with dot' => [
-                'url' => new Url('http://example.'),
+                'url' => new Uri('http://example.'),
                 'expectedIsPubliclyRoutable' => true,
             ],
             'valid' => [
-                'url' => new Url('http://example.com'),
+                'url' => new Uri('http://example.com'),
                 'expectedIsPubliclyRoutable' => false,
             ],
         ];
@@ -67,15 +67,15 @@ class InspectorTest extends \PHPUnit\Framework\TestCase
     {
         return [
             'no scheme, no host is not protocol relative' => [
-                'uri' => new Url('/path'),
+                'uri' => new Uri('/path'),
                 'expectedIsProtocolRelative' => false,
             ],
             'has scheme is not protocol relative' => [
-                'uri' => new Url('http://example'),
+                'uri' => new Uri('http://example'),
                 'expectedIsProtocolRelative' => false,
             ],
             'no scheme has host is protocol relative' => [
-                'uri' => new Url('//example.com'),
+                'uri' => new Uri('//example.com'),
                 'expectedIsProtocolRelative' => true,
             ],
         ];
