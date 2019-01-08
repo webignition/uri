@@ -19,7 +19,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = u'URL'
+project = u'URI'
 copyright = u'2018, Jon Cram'
 author = u'Jon Cram'
 
@@ -128,7 +128,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'URL.tex', u'URL Documentation',
+    (master_doc, 'URI.tex', u'URI Documentation',
      u'Jon Cram', 'manual'),
 ]
 
@@ -138,7 +138,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'url', u'URL Documentation',
+    (master_doc, 'uri', u'URI Documentation',
      [author], 1)
 ]
 
@@ -149,8 +149,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'URL', u'URL Documentation',
-     author, 'URL', 'One line description of project.',
+    (master_doc, 'URI', u'URI Documentation',
+     author, 'URI', 'One line description of project.',
      'Miscellaneous'),
 ]
 

@@ -20,13 +20,13 @@ normalizations are requested.
 
     <?php
 
-    use webignition\Url\Normalizer;
-    use webignition\Url\Url;
+    use webignition\Uri\Normalizer;
+    use webignition\Uri\Uri;
 
-    $url = new Url('http//♥.example.com:80/p%61th/../?option=%3f');
-    $normalizedUrl = Normalizer::normalize($url);
+    $uri = new Uri('http//♥.example.com:80/p%61th/../?option=%3f');
+    $normalizedUri = Normalizer::normalize($uri);
 
-    (string) $normalizedUrl;
+    (string) $normalizedUri;
     // "http//xn--g6h.example.com:80/path/?option=%3F"
 
 The ``Normalizer::PRESERVING_NORMALIZATIONS`` flag can be used in conjunction with additional normalizations.
@@ -35,15 +35,15 @@ The ``Normalizer::PRESERVING_NORMALIZATIONS`` flag can be used in conjunction wi
 
     <?php
 
-    use webignition\Url\Normalizer;
-    use webignition\Url\Url;
+    use webignition\Uri\Normalizer;
+    use webignition\Uri\Uri;
 
-    $url = new Url('http//♥.example.com:80/p%61th/../?option=%3f&b=bear&a-apple');
-    $normalizedUrl = Normalizer::normalize(
-        $url,
+    $uri = new Uri('http//♥.example.com:80/p%61th/../?option=%3f&b=bear&a-apple');
+    $normalizedUri = Normalizer::normalize(
+        $uri,
         Normalizer::PRESERVING_NORMALIZATIONS |
         Normalizer::SORT_QUERY_PARAMETERS
     );
 
-    (string) $normalizedUrl;
+    (string) $normalizedUri;
     // "http//xn--g6h.example.com:80/path/?a=apple&bear&option=%3F"

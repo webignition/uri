@@ -2,7 +2,7 @@
 
     <?php
 
-    use webignition\Url\Parser;
+    use webignition\Uri\Parser;
 
     $components = Parser::parse('https://example.com:8080/path?query#fragment');
 

@@ -2,14 +2,14 @@
 
     <?php
 
-    use webignition\Url\Normalizer;
+    use webignition\Uri\Normalizer;
 
-    $url = new Url('http://example.com/path?c=cow&a=apple&b=bear#fragment');
+    $uri = new Uri('http://example.com/path?c=cow&a=apple&b=bear#fragment');
 
-    $normalizedUrl = Normalizer::normalize(
-        $url,
+    $normalizedUri = Normalizer::normalize(
+        $uri,
         Normalizer::SORT_QUERY_PARAMETERS | Normalizer::REMOVE_FRAGMENT
     );
 
-    (string) $normalizedUrl;
+    (string) $normalizedUri;
     // "http://example.com/path?a=apple&b=bear&c=cow"

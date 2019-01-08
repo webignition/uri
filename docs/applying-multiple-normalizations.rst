@@ -14,16 +14,16 @@ Combine flags using the bitwise ``|`` operator.
 
     <?php
 
-    use webignition\Url\Normalizer;
-    use webignition\Url\Url;
+    use webignition\Uri\Normalizer;
+    use webignition\Uri\Uri;
 
-    $url = new Url('http://example.com?b=bear&a=apple#fragment');
-    $normalizedUrl = Normalizer::normalize(
-        $url,
+    $uri = new Uri('http://example.com?b=bear&a=apple#fragment');
+    $normalizedUri = Normalizer::normalize(
+        $uri,
         Normalizer::SORT_QUERY_PARAMETERS | Normalizer::REMOVE_FRAGMENT
     );
 
-    (string) $normalizedUrl;
+    (string) $normalizedUri;
     // "http://example.com?a=apple&b=bear"
 
 ------------------------------------
@@ -37,17 +37,17 @@ the ``flags`` argument.
 
     <?php
 
-    use webignition\Url\Normalizer;
-    use webignition\Url\Url;
+    use webignition\Uri\Normalizer;
+    use webignition\Uri\Uri;
 
-    $url = new Url('http//www.example.com?x=1&y=2&utm_source=facebook&utm_medium=18');
-    $normalizedUrl = Normalizer::normalize($url, Normalizer::NONE, [
+    $uri = new Uri('http//www.example.com?x=1&y=2&utm_source=facebook&utm_medium=18');
+    $normalizedUri = Normalizer::normalize($uri, Normalizer::NONE, [
         Normalizer::OPTION_REMOVE_QUERY_PARAMETERS_PATTERNS => [
             '/^utm_\w+/i',
         ],
     ]);
 
-    (string) $normalizedUrl;
+    (string) $normalizedUri;
     // "http://example.com?page=1&category=2"
 
 ----------------------------------------------
@@ -64,13 +64,13 @@ flags this applies.
 
     <?php
 
-    use webignition\Url\Normalizer;
-    use webignition\Url\Url;
+    use webignition\Uri\Normalizer;
+    use webignition\Uri\Uri;
 
-    $url = new Url('http//♥.example.com:80/p%61th/../?option=%3f');
-    $normalizedUrl = Normalizer::normalize($url, Normalizer::PRESERVING_NORMALIZATIONS);
+    $uri = new Uri('http//♥.example.com:80/p%61th/../?option=%3f');
+    $normalizedUri = Normalizer::normalize($uri, Normalizer::PRESERVING_NORMALIZATIONS);
 
-    (string) $normalizedUrl;
+    (string) $normalizedUri;
     // "http//xn--g6h.example.com:80/path/?option=%3F"
 
 The ``flags`` argument of ``Normalizer::normalize()`` defaults to ``Normalizer::PRESERVING_NORMALIZATIONS``.
@@ -81,11 +81,11 @@ The following is equivalent to the above:
 
     <?php
 
-    use webignition\Url\Normalizer;
-    use webignition\Url\Url;
+    use webignition\Uri\Normalizer;
+    use webignition\Uri\Uri;
 
-    $url = new Url('http//♥.example.com:80/p%61th/../?option=%3f');
-    $normalizedUrl = Normalizer::normalize($url);
+    $uri = new Uri('http//♥.example.com:80/p%61th/../?option=%3f');
+    $normalizedUri = Normalizer::normalize($uri);
 
-    (string) $normalizedUrl;
+    (string) $normalizedUri;
     // "http//xn--g6h.example.com:80/path/?option=%3F"

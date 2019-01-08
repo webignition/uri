@@ -6,10 +6,10 @@ Overview
 Url
 ---
 
-.. include:: includes/url/introduction.rst
-.. include:: includes/url/example.rst
+.. include:: includes/uri/introduction.rst
+.. include:: includes/uri/example.rst
 
-Read the :doc:`Url usage </url>` guide for more detail.
+Read the :doc:`Uri usage </uri>` guide for more detail.
 
 ----------
 Normalizer

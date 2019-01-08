@@ -23,13 +23,13 @@ case-insensitive.
 
     <?php
 
-    use webignition\Url\Normalizer;
-    use webignition\Url\Url;
+    use webignition\Uri\Normalizer;
+    use webignition\Uri\Uri;
 
-    $url = new Url('http://example.com/path%2fvalue');
-    $normalizedUrl = Normalizer::normalize($url, Normalizer::CAPITALIZE_PERCENT_ENCODING);
+    $uri = new Uri('http://example.com/path%2fvalue');
+    $normalizedUri = Normalizer::normalize($uri, Normalizer::CAPITALIZE_PERCENT_ENCODING);
 
-    (string) $normalizedUrl;
+    (string) $normalizedUri;
     // "http://example.com/path%2Fvalue"
 
 .. _normalizations-decode-unreserved-characters:
@@ -46,13 +46,13 @@ Decodes encoded forms of: ``ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
 
     <?php
 
-    use webignition\Url\Normalizer;
-    use webignition\Url\Url;
+    use webignition\Uri\Normalizer;
+    use webignition\Uri\Uri;
 
-    $url = new Url('http://example.com/%75%72%6C');
-    $normalizedUrl = Normalizer::normalize($url, Normalizer::DECODE_UNRESERVED_CHARACTERS);
+    $uri = new Uri('http://example.com/%75%72%6C');
+    $normalizedUri = Normalizer::normalize($uri, Normalizer::DECODE_UNRESERVED_CHARACTERS);
 
-    (string) $normalizedUrl;
+    (string) $normalizedUri;
     // "http://example.com/url"
 
 .. _normalizations-convert-empty-http-path:
@@ -67,13 +67,13 @@ Applies a path of ``/`` where the path is empty and the scheme is ``http`` or ``
 
     <?php
 
-    use webignition\Url\Normalizer;
-    use webignition\Url\Url;
+    use webignition\Uri\Normalizer;
+    use webignition\Uri\Uri;
 
-    $url = new Url('http://example.com');
-    $normalizedUrl = Normalizer::normalize($url, Normalizer::CONVERT_EMPTY_HTTP_PATH);
+    $uri = new Uri('http://example.com');
+    $normalizedUri = Normalizer::normalize($uri, Normalizer::CONVERT_EMPTY_HTTP_PATH);
 
-    (string) $normalizedUrl;
+    (string) $normalizedUri;
     // "http://example.com/"
 
 .. _normalizations-remove-default-file-host:
@@ -88,13 +88,13 @@ Removes the host of ``localhost`` from a ``file://`` url.
 
     <?php
 
-    use webignition\Url\Normalizer;
-    use webignition\Url\Url;
+    use webignition\Uri\Normalizer;
+    use webignition\Uri\Uri;
 
-    $url = new Url('file://localhost/path');
-    $normalizedUrl = Normalizer::normalize($url, Normalizer::REMOVE_DEFAULT_FILE_HOST);
+    $uri = new Uri('file://localhost/path');
+    $normalizedUri = Normalizer::normalize($uri, Normalizer::REMOVE_DEFAULT_FILE_HOST);
 
-    (string) $normalizedUrl;
+    (string) $normalizedUri;
     // "file:///path"
 
 .. _normalizations-remove-default-port:
@@ -109,18 +109,18 @@ Removes the port if it matches the default port for the scheme.
 
     <?php
 
-    use webignition\Url\Normalizer;
-    use webignition\Url\Url;
+    use webignition\Uri\Normalizer;
+    use webignition\Uri\Uri;
 
-    $url = new Url('http://example.com:80');
-    $normalizedUrl = Normalizer::normalize($url, Normalizer::REMOVE_DEFAULT_PORT);
+    $uri = new Uri('http://example.com:80');
+    $normalizedUri = Normalizer::normalize($uri, Normalizer::REMOVE_DEFAULT_PORT);
 
-    (string) $normalizedUrl;
+    (string) $normalizedUri;
     // "http://example.com"
 
-    $url = new Url('https://example.com:443');
-    $normalizedUrl = Normalizer::normalize($url, Normalizer::REMOVE_DEFAULT_PORT);
-    (string) $normalizedUrl;
+    $uri = new Uri('https://example.com:443');
+    $normalizedUri = Normalizer::normalize($uri, Normalizer::REMOVE_DEFAULT_PORT);
+    (string) $normalizedUri;
     // "https://example.com"
 
 .. _normalizations-remove-path-dot-segments:
@@ -136,13 +136,13 @@ is re-written to be equivalent.
 
     <?php
 
-    use webignition\Url\Normalizer;
-    use webignition\Url\Url;
+    use webignition\Uri\Normalizer;
+    use webignition\Uri\Uri;
 
-    $url = new Url('http://example.com/a/b/c/./../../g');
-    $normalizedUrl = Normalizer::normalize($url, Normalizer::REMOVE_PATH_DOT_SEGMENTS);
+    $uri = new Uri('http://example.com/a/b/c/./../../g');
+    $normalizedUri = Normalizer::normalize($uri, Normalizer::REMOVE_PATH_DOT_SEGMENTS);
 
-    (string) $normalizedUrl;
+    (string) $normalizedUri;
     // "http://example.com/a/g"
 
 .. _normalizations-convert-host-unicode-to-punycode:
@@ -158,13 +158,13 @@ Unicode hosts containing non-ascii characters are converted to the
 
     <?php
 
-    use webignition\Url\Normalizer;
-    use webignition\Url\Url;
+    use webignition\Uri\Normalizer;
+    use webignition\Uri\Uri;
 
-    $url = new Url('http://♥.example.com/');
-    $normalizedUrl = Normalizer::normalize($url, Normalizer::CONVERT_HOST_UNICODE_TO_PUNYCODE);
+    $uri = new Uri('http://♥.example.com/');
+    $normalizedUri = Normalizer::normalize($uri, Normalizer::CONVERT_HOST_UNICODE_TO_PUNYCODE);
 
-    (string) $normalizedUrl;
+    (string) $normalizedUri;
     // "http://xn--g6h.example.com/"
 
 .. _normalizations-reduce-duplicate-path-slashes:
@@ -179,13 +179,13 @@ Reduces occurrences of multiple slashes in the path to single slashes.
 
     <?php
 
-    use webignition\Url\Normalizer;
-    use webignition\Url\Url;
+    use webignition\Uri\Normalizer;
+    use webignition\Uri\Uri;
 
-    $url = new Url('http://example.com///path//');
-    $normalizedUrl = Normalizer::normalize($url, Normalizer::REDUCE_DUPLICATE_PATH_SLASHES);
+    $uri = new Uri('http://example.com///path//');
+    $normalizedUri = Normalizer::normalize($uri, Normalizer::REDUCE_DUPLICATE_PATH_SLASHES);
 
-    (string) $normalizedUrl;
+    (string) $normalizedUri;
     // "http://example.com/path/"
 
 .. _normalizations-sort-query-parameters:
@@ -202,13 +202,13 @@ Sorting is neither locale- nor unicode-aware. The purpose is to be able to compa
 
     <?php
 
-    use webignition\Url\Normalizer;
-    use webignition\Url\Url;
+    use webignition\Uri\Normalizer;
+    use webignition\Uri\Uri;
 
-    $url = new Url('http://example.com?c=cow&a=apple&b=bear');
-    $normalizedUrl = Normalizer::normalize($url, Normalizer::SORT_QUERY_PARAMETERS);
+    $uri = new Uri('http://example.com?c=cow&a=apple&b=bear');
+    $normalizedUri = Normalizer::normalize($uri, Normalizer::SORT_QUERY_PARAMETERS);
 
-    (string) $normalizedUrl;
+    (string) $normalizedUri;
     // "http://example.com?a=apple&b=bear&c=cow"
 
 .. _normalizations-add-path-trailing-slash:
@@ -223,13 +223,13 @@ Add a trailing slash to the path if not present.
 
     <?php
 
-    use webignition\Url\Normalizer;
-    use webignition\Url\Url;
+    use webignition\Uri\Normalizer;
+    use webignition\Uri\Uri;
 
-    $url = new Url('http://example.com');
-    $normalizedUrl = Normalizer::normalize($url, Normalizer::ADD_PATH_TRAILING_SLASH);
+    $uri = new Uri('http://example.com');
+    $normalizedUri = Normalizer::normalize($uri, Normalizer::ADD_PATH_TRAILING_SLASH);
 
-    (string) $normalizedUrl;
+    (string) $normalizedUri;
     // "http://example.com/"
 
 .. _normalizations-remove-user-info:
@@ -244,13 +244,13 @@ Remove user credentials.
 
     <?php
 
-    use webignition\Url\Normalizer;
-    use webignition\Url\Url;
+    use webignition\Uri\Normalizer;
+    use webignition\Uri\Uri;
 
-    $url = new Url('http://user:password@example.com');
-    $normalizedUrl = Normalizer::normalize($url, Normalizer::REMOVE_USER_INFO);
+    $uri = new Uri('http://user:password@example.com');
+    $normalizedUri = Normalizer::normalize($uri, Normalizer::REMOVE_USER_INFO);
 
-    (string) $normalizedUrl;
+    (string) $normalizedUri;
     // "http://example.com"
 
 .. _normalizations-remove-fragment:
@@ -265,13 +265,13 @@ Remove fragment component.
 
     <?php
 
-    use webignition\Url\Normalizer;
-    use webignition\Url\Url;
+    use webignition\Uri\Normalizer;
+    use webignition\Uri\Uri;
 
-    $url = new Url('http://example.com#fragment');
-    $normalizedUrl = Normalizer::normalize($url, Normalizer::REMOVE_FRAGMENT);
+    $uri = new Uri('http://example.com#fragment');
+    $normalizedUri = Normalizer::normalize($uri, Normalizer::REMOVE_FRAGMENT);
 
-    (string) $normalizedUrl;
+    (string) $normalizedUri;
     // "http://example.com"
 
 .. _normalizations-remove-www:
@@ -286,13 +286,13 @@ Remove the www sub-domain.
 
     <?php
 
-    use webignition\Url\Normalizer;
-    use webignition\Url\Url;
+    use webignition\Uri\Normalizer;
+    use webignition\Uri\Uri;
 
-    $url = new Url('http://www.example.com');
-    $normalizedUrl = Normalizer::normalize($url, Normalizer::REMOVE_WWW);
+    $uri = new Uri('http://www.example.com');
+    $normalizedUri = Normalizer::normalize($uri, Normalizer::REMOVE_WWW);
 
-    (string) $normalizedUrl;
+    (string) $normalizedUri;
     // "http://example.com"
 
 .. _normalizations-default-scheme:
@@ -307,15 +307,15 @@ Specify a default scheme to be applied if none is present.
 
     <?php
 
-    use webignition\Url\Normalizer;
-    use webignition\Url\Url;
+    use webignition\Uri\Normalizer;
+    use webignition\Uri\Uri;
 
-    $url = new Url('//www.example.com');
-    $normalizedUrl = Normalizer::normalize($url, Normalizer::NONE, [
+    $uri = new Uri('//www.example.com');
+    $normalizedUri = Normalizer::normalize($uri, Normalizer::NONE, [
         Normalizer::OPTION_DEFAULT_SCHEME => 'http',
     ]);
 
-    (string) $normalizedUrl;
+    (string) $normalizedUri;
     // "http://example.com"
 
 .. _normalizations-remove-filenames-from-path-by-pattern:
@@ -332,15 +332,15 @@ Useful for stripping common default filenames such as ``index.html``, ``index.js
 
     <?php
 
-    use webignition\Url\Normalizer;
-    use webignition\Url\Url;
+    use webignition\Uri\Normalizer;
+    use webignition\Uri\Uri;
 
-    $url = new Url('http//www.example.com/index.html');
-    $normalizedUrl = Normalizer::normalize($url, Normalizer::NONE, [
+    $uri = new Uri('http//www.example.com/index.html');
+    $normalizedUri = Normalizer::normalize($uri, Normalizer::NONE, [
         Normalizer::OPTION_REMOVE_PATH_FILES_PATTERNS => Normalizer::REMOVE_INDEX_FILE_PATTERN,
     ]);
 
-    (string) $normalizedUrl;
+    (string) $normalizedUri;
     // "http://example.com/"
 
 .. _normalizations-remove-query-parameters-by-pattern:
@@ -357,15 +357,15 @@ Useful for stripping query parameters considered by you to be irrelevant to the 
 
     <?php
 
-    use webignition\Url\Normalizer;
-    use webignition\Url\Url;
+    use webignition\Uri\Normalizer;
+    use webignition\Uri\Uri;
 
-    $url = new Url('http//www.example.com?x=1&y=2&utm_source=facebook&utm_medium=18');
-    $normalizedUrl = Normalizer::normalize($url, Normalizer::NONE, [
+    $uri = new Uri('http//www.example.com?x=1&y=2&utm_source=facebook&utm_medium=18');
+    $normalizedUri = Normalizer::normalize($uri, Normalizer::NONE, [
         Normalizer::OPTION_REMOVE_QUERY_PARAMETERS_PATTERNS => [
             '/^utm_\w+/i',
         ],
     ]);
 
-    (string) $normalizedUrl;
+    (string) $normalizedUri;
     // "http://example.com?page=1&category=2"

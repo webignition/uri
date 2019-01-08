@@ -2,20 +2,20 @@
 
     <?php
 
-    use webignition\Url\Url;
+    use webignition\Uri\Uri;
 
-    $url = new Url('http://example.com/path?query#fragment');
+    $uri = new Uri('http://example.com/path?query#fragment');
 
-    $url->getScheme();
+    $uri->getScheme();
     // "http"
 
-    $url->getQuery();
+    $uri->getQuery();
     // "query"
 
-    $modifiedUrl = $url
+    $modifiedUri = $uri
         ->withScheme('https')
         ->withPath('/modified-path')
         ->withQuery('foo=bar')
         ->withFragment('');
-    (string) $modifiedUrl;
+    (string) $modifiedUri;
     // https://example.com/modified-path?foo=bar

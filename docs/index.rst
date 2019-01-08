@@ -1,15 +1,15 @@
-.. title:: URL Documentation
+.. title:: URI Documentation
 
 =================
-URL Documentation
+URI Documentation
 =================
 
-The `webginition/url <https://packagist.org/packages/webignition/url>`_ package models, normalizes, parses and
+The `webginition/uri <https://packagist.org/packages/webignition/uri>`_ package models, normalizes, parses and
 compares URLs.
 
 The :doc:`overview </overview>` provides a high-level introduction to the package classes.
 
-You might want to skip straight to the :doc:`Url usage guide </url>` or the :doc:`Normalizer usage guide </normalizer>`.
+You might want to skip straight to the :doc:`Uri usage guide </uri>` or the :doc:`Normalizer usage guide </normalizer>`.
 
 .. toctree::
     :hidden:
@@ -22,7 +22,7 @@ You might want to skip straight to the :doc:`Url usage guide </url>` or the :doc
     :caption: Usage
     :maxdepth: 3
 
-    url
+    uri
     normalizer
 
 .. toctree::
