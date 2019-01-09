@@ -581,4 +581,106 @@ class UriTest extends \PHPUnit\Framework\TestCase
             ],
         ];
     }
+
+    /**
+     * @dataProvider composeDataProvider
+     *
+     * @param string $scheme
+     * @param string $authority
+     * @param string $path
+     * @param string $query
+     * @param string $fragment
+     * @param string $expectedUri
+     */
+    public function testCompose(
+        string $scheme,
+        string $authority,
+        string $path,
+        string $query,
+        string $fragment,
+        string $expectedUri
+    ) {
+        $this->assertEquals(
+            $expectedUri,
+            (string) Uri::compose($scheme, $authority, $path, $query, $fragment)
+        );
+    }
+
+    public function composeDataProvider(): array
+    {
+        return [
+            'empty' => [
+                'scheme' => '',
+                'authority' => '',
+                'path' => '',
+                'query' => '',
+                'fragment' => '',
+                'expectedUrl' => '',
+            ],
+            'scheme only' => [
+                'scheme' => 'https',
+                'authority' => '',
+                'path' => '',
+                'query' => '',
+                'fragment' => '',
+                'expectedUrl' => 'https:',
+            ],
+            'authority only' => [
+                'scheme' => '',
+                'authority' => 'user:pass@example.com:8080',
+                'path' => '',
+                'query' => '',
+                'fragment' => '',
+                'expectedUrl' => '//user:pass@example.com:8080',
+            ],
+            'path only (relative)' => [
+                'scheme' => '',
+                'authority' => '',
+                'path' => 'path',
+                'query' => '',
+                'fragment' => '',
+                'expectedUrl' => 'path',
+            ],
+            'path only (absolute)' => [
+                'scheme' => '',
+                'authority' => '',
+                'path' => '/path',
+                'query' => '',
+                'fragment' => '',
+                'expectedUrl' => '/path',
+            ],
+            'query only' => [
+                'scheme' => '',
+                'authority' => '',
+                'path' => '',
+                'query' => 'query',
+                'fragment' => '',
+                'expectedUrl' => '?query',
+            ],
+            'fragment only' => [
+                'scheme' => '',
+                'authority' => '',
+                'path' => '',
+                'query' => '',
+                'fragment' => 'fragment',
+                'expectedUrl' => '#fragment',
+            ],
+            'full (relative path)' => [
+                'scheme' => 'https',
+                'authority' => 'user:pass@example.com:4433',
+                'path' => 'path',
+                'query' => 'query',
+                'fragment' => 'fragment',
+                'expectedUrl' => 'https://user:pass@example.com:4433/path?query#fragment',
+            ],
+            'full (absolute path)' => [
+                'scheme' => 'https',
+                'authority' => 'user:pass@example.com:4433',
+                'path' => '/path',
+                'query' => 'query',
+                'fragment' => 'fragment',
+                'expectedUrl' => 'https://user:pass@example.com:4433/path?query#fragment',
+            ],
+        ];
+    }
 }
