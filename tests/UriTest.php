@@ -1,4 +1,5 @@
 <?php
+/** @noinspection PhpDocSignatureInspection */
 
 namespace webignition\Uri\Tests;
 
@@ -13,6 +14,7 @@ class UriTest extends \PHPUnit\Framework\TestCase
 
     public function testCreateWithInvalidPort()
     {
+        /** @noinspection PhpParamsInspection */
         $this->expectException(\InvalidArgumentException::class);
 
         new Uri('http://example.com:' . (Filter::MIN_PORT - 1));
@@ -20,9 +22,6 @@ class UriTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @dataProvider getSchemeDataProvider
-     *
-     * @param string $scheme
-     * @param string $expectedScheme
      */
     public function testGetScheme(string $scheme, string $expectedScheme)
     {
@@ -56,9 +55,6 @@ class UriTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @dataProvider getAuthorityDataProvider
-     *
-     * @param string $url
-     * @param string $expectedAuthority
      */
     public function testGetAuthority(string $url, string $expectedAuthority)
     {
@@ -105,9 +101,6 @@ class UriTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @dataProvider getUserInfoDataProvider
-     *
-     * @param string $url
-     * @param string $expectedUserInfo
      */
     public function testGetUserInfo(string $url, string $expectedUserInfo)
     {
@@ -154,9 +147,6 @@ class UriTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @dataProvider getHostDataProvider
-     *
-     * @param string $url
-     * @param string $expectedHost
      */
     public function testGetHost(string $url, string $expectedHost)
     {
@@ -191,9 +181,6 @@ class UriTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @dataProvider getPortDataProvider
-     *
-     * @param string $url
-     * @param int|null $expectedPort
      */
     public function testGetPort(string $url, ?int $expectedPort)
     {
@@ -228,11 +215,6 @@ class UriTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @dataProvider getPathGetQueryGetFragmentDataProvider
-     *
-     * @param string $url
-     * @param string $expectedPath
-     * @param string $expectedQuery
-     * @param string $expectedFragment
      */
     public function testGetPathGetQueryGetFragment(
         string $url,
@@ -357,6 +339,7 @@ class UriTest extends \PHPUnit\Framework\TestCase
     {
         $url = new Uri('http://example.com/');
 
+        /** @noinspection PhpParamsInspection */
         $this->expectException(\InvalidArgumentException::class);
 
         $url->withPort(Filter::MIN_PORT - 1);
@@ -432,9 +415,6 @@ class UriTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @dataProvider toStringWithMutationDataProvider
-     *
-     * @param Uri $url
-     * @param string $expectedUri
      */
     public function testToStringWithMutation(Uri $url, string $expectedUri)
     {
@@ -469,8 +449,6 @@ class UriTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @dataProvider toStringDataProvider
-     *
-     * @param string $url
      */
     public function testToString(string $url)
     {
@@ -515,11 +493,6 @@ class UriTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @dataProvider encodingOfGenAndSubDelimitersDataProvider
-     *
-     * @param string $url
-     * @param string $expectedPath
-     * @param string $expectedQuery
-     * @param string $expectedFragment
      */
     public function testEncodingOfGenAndSubDelimiters(
         string $url,
@@ -584,13 +557,6 @@ class UriTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @dataProvider composeDataProvider
-     *
-     * @param string $scheme
-     * @param string $authority
-     * @param string $path
-     * @param string $query
-     * @param string $fragment
-     * @param string $expectedUri
      */
     public function testCompose(
         string $scheme,
