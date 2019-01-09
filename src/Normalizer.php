@@ -201,33 +201,30 @@ class Normalizer
             return $path;
         }
 
-        if (in_array($path, ['/..', '/.'])) {
-            return '/';
-        }
+        $results = [];
+        $segments = explode('/', $path);
+        $segment = '';
 
-        $lastCharacter = $path[-1];
-        $pathParts = explode('/', $path);
-        $normalisedPathParts = [];
-
-        foreach ($pathParts as $pathPart) {
-            if ('.' === $pathPart) {
-                continue;
-            }
-
-            if ('..' === $pathPart) {
-                array_pop($normalisedPathParts);
-            } else {
-                $normalisedPathParts[] = $pathPart;
+        foreach ($segments as $segment) {
+            if ('..' === $segment) {
+                array_pop($results);
+            } elseif ('.' !== $segment) {
+                $results[] = $segment;
             }
         }
 
-        $path = implode('/', $normalisedPathParts);
+        $newPath = implode('/', $results);
 
-        if (empty($path) && '/' === $lastCharacter) {
-            $path = '/';
+        $pathHasLeadingSlash = '/' === $path[0];
+        $newPathLacksLeadingSlash = '/' !== ($newPath[0] ?? '');
+
+        if ($pathHasLeadingSlash && $newPathLacksLeadingSlash) {
+            $newPath = '/' . $newPath;
+        } elseif ($newPath !== '' && ('.' === $segment || '..' === $segment)) {
+            $newPath .= '/';
         }
 
-        return $path;
+        return $newPath;
     }
 
     private static function addPathTrailingSlash(string $path): string

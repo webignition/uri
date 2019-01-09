@@ -166,6 +166,16 @@ class NormalizerTest extends \PHPUnit\Framework\TestCase
     public function removeDotPathSegmentsDataProvider(): array
     {
         return [
+            'removeDotPathSegments: trailing slash dot' => [
+                'url' => 'http://example.com/a/b/c/.',
+                'expectedUrl' => 'http://example.com/a/b/c/',
+                'flags' => Normalizer::REMOVE_PATH_DOT_SEGMENTS,
+            ],
+            'removeDotPathSegments: trailing slash dot dot' => [
+                'url' => 'http://example.com/a/b/c/..',
+                'expectedUrl' => 'http://example.com/a/b/',
+                'flags' => Normalizer::REMOVE_PATH_DOT_SEGMENTS,
+            ],
             'removeDotPathSegments: no path' => [
                 'url' => 'http://example.com',
                 'expectedUrl' => 'http://example.com',
@@ -198,7 +208,7 @@ class NormalizerTest extends \PHPUnit\Framework\TestCase
             ],
             'removeDotPathSegments: many single dot' => [
                 'url' => 'http://example.com/././././././././././././././.',
-                'expectedUrl' => 'http://example.com',
+                'expectedUrl' => 'http://example.com/',
                 'flags' => Normalizer::REMOVE_PATH_DOT_SEGMENTS,
             ],
             'removeDotPathSegments: many single dot, trailing slash' => [
@@ -208,7 +218,7 @@ class NormalizerTest extends \PHPUnit\Framework\TestCase
             ],
             'removeDotPathSegments: many double dot' => [
                 'url' => 'http://example.com/../../../../../..',
-                'expectedUrl' => 'http://example.com',
+                'expectedUrl' => 'http://example.com/',
                 'flags' => Normalizer::REMOVE_PATH_DOT_SEGMENTS,
             ],
             'removeDotPathSegments: many double dot, trailing slash' => [
