@@ -17,7 +17,7 @@ class NormalizerTest extends \PHPUnit\Framework\TestCase
      * @dataProvider removeFragmentDataProvider
      * @dataProvider removeWwwDataProvider
      * @dataProvider removePathFilesDataProvider
-     * @dataProvider removeDotPathSegmentsDataProvider
+     * @dataProvider removePathDotSegmentsDataProvider
      * @dataProvider addTrailingSlashDataProvider
      * @dataProvider sortQueryParametersDataProvider
      * @dataProvider reduceDuplicatePathSlashesDataProvider
@@ -163,7 +163,7 @@ class NormalizerTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
-    public function removeDotPathSegmentsDataProvider(): array
+    public function removePathDotSegmentsDataProvider(): array
     {
         return [
             'removeDotPathSegments: trailing slash dot' => [
