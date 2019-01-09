@@ -59,6 +59,27 @@ class Uri implements UriInterface
         self::applyComponents($this, $scheme, (string) $userInfo, $host, $port, $path, $query, $fragment);
     }
 
+    public static function compose(string $scheme, string $authority, string $path, string $query, string $fragment)
+    {
+        $uriString = '';
+
+        if (!empty($scheme)) {
+            $uriString .= $scheme . ':';
+        }
+
+        if (!empty($authority)) {
+            $uriString .= '//' . $authority;
+        }
+
+        if ('' !== $uriString && strlen($path) && '/' !== $path[0]) {
+            $path = '/' . $path;
+        }
+
+        $uriString .= $path . '?' . $query . '#' . $fragment;
+
+        return new Uri($uriString);
+    }
+
     public function getScheme(): string
     {
         return $this->scheme;
