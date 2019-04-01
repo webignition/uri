@@ -2,7 +2,7 @@
 
 namespace webignition\Uri;
 
-use Mso\IdnaConvert\IdnaConvert;
+use Algo26\IdnaConvert\IdnaConvert;
 
 class PunycodeEncoder
 {
