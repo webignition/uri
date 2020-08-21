@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "766f7455c3c1c243975f857196ecb4cc",
+    "content-hash": "0c1d0b59ee08b9c1ec867d64e4a2a756",
     "packages": [
         {
             "name": "algo26-matthias/idna-convert",
@@ -55,6 +55,61 @@
             "time": "2019-03-04T17:07:46+00:00"
         },
         {
+            "name": "hookedmedia/ip-utils",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/HookedMedia/ip-utils.git",
+                "reference": "cc45ef4b259218f384568b0729efd9243cb9f51e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/HookedMedia/ip-utils/zipball/cc45ef4b259218f384568b0729efd9243cb9f51e",
+                "reference": "cc45ef4b259218f384568b0729efd9243cb9f51e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.0.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-default": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "IpUtils\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christoph Mewes",
+                    "homepage": "http://www.xrstf.de/"
+                },
+                {
+                    "name": "ReviewPush LLC",
+                    "homepage": "https://reviewpush.com/"
+                }
+            ],
+            "description": "small library to deal with IPv4 & IPv6 addresses and subnets",
+            "keywords": [
+                "IP",
+                "ipv4",
+                "ipv6",
+                "matching",
+                "subnet"
+            ],
+            "time": "2020-08-20T20:53:48+00:00"
+        },
+        {
             "name": "psr/http-message",
             "version": "1.0.1",
             "source": {
@@ -103,54 +158,6 @@
                 "response"
             ],
             "time": "2016-08-06T14:39:51+00:00"
-        },
-        {
-            "name": "xrstf/ip-utils",
-            "version": "v1.0.0",
-            "source": {
-                "type": "hg",
-                "url": "https://bitbucket.org/xrstf/ip-utils",
-                "reference": "d7469bb0c407e423c9d1b49ff2e8980c800871e2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://bitbucket.org/xrstf/ip-utils/get/d7469bb0c407e423c9d1b49ff2e8980c800871e2.zip",
-                "reference": "d7469bb0c407e423c9d1b49ff2e8980c800871e2",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-default": "1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "IpUtils\\": "lib/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Christoph Mewes",
-                    "homepage": "http://www.xrstf.de/"
-                }
-            ],
-            "description": "small library to deal with IPv4 & IPv6 addresses and subnets",
-            "keywords": [
-                "IP",
-                "ipv4",
-                "ipv6",
-                "matching",
-                "subnet"
-            ],
-            "time": "2013-02-27T03:27:30+00:00"
         }
     ],
     "packages-dev": [
@@ -1104,6 +1111,7 @@
             "keywords": [
                 "tokenizer"
             ],
+            "abandoned": true,
             "time": "2018-10-30T05:52:18+00:00"
         },
         {
@@ -1962,5 +1970,6 @@
     "platform": {
         "php": ">=7.2"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "1.1.0"
 }
