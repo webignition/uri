@@ -6,18 +6,18 @@ use Psr\Http\Message\UriInterface;
 
 class Normalizer
 {
-    const SCHEME_HTTP = 'http';
-    const SCHEME_HTTPS = 'https';
-    const SCHEME_FILE = 'file';
+    public const SCHEME_HTTP = 'http';
+    public const SCHEME_HTTPS = 'https';
+    public const SCHEME_FILE = 'file';
 
-    const PATH_SEPARATOR = '/';
-    const QUERY_KEY_VALUE_DELIMITER = '&';
+    public const PATH_SEPARATOR = '/';
+    public const QUERY_KEY_VALUE_DELIMITER = '&';
 
-    const OPTION_DEFAULT_SCHEME = 'default-scheme';
-    const OPTION_REMOVE_PATH_FILES_PATTERNS = 'remove-path-files-patterns';
-    const OPTION_REMOVE_QUERY_PARAMETERS_PATTERNS = 'remove-query-parameters-patterns';
+    public const OPTION_DEFAULT_SCHEME = 'default-scheme';
+    public const OPTION_REMOVE_PATH_FILES_PATTERNS = 'remove-path-files-patterns';
+    public const OPTION_REMOVE_QUERY_PARAMETERS_PATTERNS = 'remove-query-parameters-patterns';
 
-    const PRESERVING_NORMALIZATIONS =
+    public const PRESERVING_NORMALIZATIONS =
         self::CAPITALIZE_PERCENT_ENCODING |
         self::DECODE_UNRESERVED_CHARACTERS |
         self::CONVERT_EMPTY_HTTP_PATH |
@@ -27,28 +27,28 @@ class Normalizer
         self::CONVERT_HOST_UNICODE_TO_PUNYCODE;
 
     // Semantically-lossless normalizations
-    const CAPITALIZE_PERCENT_ENCODING = 1;
-    const DECODE_UNRESERVED_CHARACTERS = 2;
-    const CONVERT_EMPTY_HTTP_PATH = 4;
-    const REMOVE_DEFAULT_FILE_HOST = 8;
-    const REMOVE_DEFAULT_PORT = 16;
-    const REMOVE_PATH_DOT_SEGMENTS = 32;
-    const CONVERT_HOST_UNICODE_TO_PUNYCODE = 64;
+    public const CAPITALIZE_PERCENT_ENCODING = 1;
+    public const DECODE_UNRESERVED_CHARACTERS = 2;
+    public const CONVERT_EMPTY_HTTP_PATH = 4;
+    public const REMOVE_DEFAULT_FILE_HOST = 8;
+    public const REMOVE_DEFAULT_PORT = 16;
+    public const REMOVE_PATH_DOT_SEGMENTS = 32;
+    public const CONVERT_HOST_UNICODE_TO_PUNYCODE = 64;
 
     // Potentially-lossy normalizations
-    const REDUCE_DUPLICATE_PATH_SLASHES = 128;
-    const SORT_QUERY_PARAMETERS = 256;
+    public const REDUCE_DUPLICATE_PATH_SLASHES = 128;
+    public const SORT_QUERY_PARAMETERS = 256;
 
     // Lossy normalizations
-    const ADD_PATH_TRAILING_SLASH = 512;
-    const REMOVE_USER_INFO = 1024;
-    const REMOVE_FRAGMENT = 2048;
-    const REMOVE_WWW = 4096;
+    public const ADD_PATH_TRAILING_SLASH = 512;
+    public const REMOVE_USER_INFO = 1024;
+    public const REMOVE_FRAGMENT = 2048;
+    public const REMOVE_WWW = 4096;
 
-    const NONE = 0;
+    public const NONE = 0;
 
-    const HOST_STARTS_WITH_WWW_PATTERN = '/^www\./';
-    const REMOVE_INDEX_FILE_PATTERN = '/^index\.[a-z]+$/i';
+    public const HOST_STARTS_WITH_WWW_PATTERN = '/^www\./';
+    public const REMOVE_INDEX_FILE_PATTERN = '/^index\.[a-z]+$/i';
 
     public static function normalize(
         UriInterface $uri,

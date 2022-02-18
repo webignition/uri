@@ -4,21 +4,21 @@ namespace webignition\Uri;
 
 class Parser
 {
-    const QUERY_DELIMITER = '?';
-    const FRAGMENT_DELIMITER = '#';
-    const PATH_DELIMITER = '/';
+    public const QUERY_DELIMITER = '?';
+    public const FRAGMENT_DELIMITER = '#';
+    public const PATH_DELIMITER = '/';
 
-    const PROTOCOL_RELATIVE_START = '//';
-    const PROTOCOL_RELATIVE_DUMMY_SCHEME = 'dummy';
+    public const PROTOCOL_RELATIVE_START = '//';
+    public const PROTOCOL_RELATIVE_DUMMY_SCHEME = 'dummy';
 
-    const COMPONENT_SCHEME = 'scheme';
-    const COMPONENT_USER = 'user';
-    const COMPONENT_PASS = 'pass';
-    const COMPONENT_HOST = 'host';
-    const COMPONENT_PORT = 'port';
-    const COMPONENT_PATH = 'path';
-    const COMPONENT_QUERY = 'query';
-    const COMPONENT_FRAGMENT = 'fragment';
+    public const COMPONENT_SCHEME = 'scheme';
+    public const COMPONENT_USER = 'user';
+    public const COMPONENT_PASS = 'pass';
+    public const COMPONENT_HOST = 'host';
+    public const COMPONENT_PORT = 'port';
+    public const COMPONENT_PATH = 'path';
+    public const COMPONENT_QUERY = 'query';
+    public const COMPONENT_FRAGMENT = 'fragment';
 
     /**
      * Scheme names consist of a sequence of characters beginning with a
@@ -26,7 +26,7 @@ class Parser
      * ("+"), period ("."), or hyphen ("-").
      * @see https://tools.ietf.org/html/rfc3986#section-3.1
      */
-    const SCHEME_ONLY_URL_PATTERN = '/^[a-z][a-z0-9+\.-]+:\/\/$/i';
+    public const SCHEME_ONLY_URL_PATTERN = '/^[a-z][a-z0-9+\.-]+:\/\/$/i';
 
     public static function parse(string $url): array
     {

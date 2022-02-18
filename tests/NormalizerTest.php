@@ -7,9 +7,9 @@ use webignition\Uri\Uri;
 
 class NormalizerTest extends \PHPUnit\Framework\TestCase
 {
-    const ALPHA_CHARACTERS = 'abcdefghijklmnopqrstuvwxyz';
-    const NUMERIC_CHARACTERS = '0123456789';
-    const UNRESERVED_NON_ALPHA_NUMERIC_CHARACTERS = '-._~';
+    public const ALPHA_CHARACTERS = 'abcdefghijklmnopqrstuvwxyz';
+    public const NUMERIC_CHARACTERS = '0123456789';
+    public const UNRESERVED_NON_ALPHA_NUMERIC_CHARACTERS = '-._~';
 
     /**
      * @dataProvider removeUserInfoDataProvider

@@ -4,7 +4,7 @@ namespace webignition\Uri;
 
 class UserInfo
 {
-    const USER_PASS_DELIMITER = ':';
+    public const USER_PASS_DELIMITER = ':';
 
     private $user = '';
     private $password = null;
