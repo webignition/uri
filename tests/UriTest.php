@@ -1,5 +1,4 @@
 <?php
-/** @noinspection PhpDocSignatureInspection */
 
 namespace webignition\Uri\Tests;
 
@@ -14,7 +13,6 @@ class UriTest extends \PHPUnit\Framework\TestCase
 
     public function testCreateWithInvalidPort()
     {
-        /** @noinspection PhpParamsInspection */
         $this->expectException(\InvalidArgumentException::class);
 
         new Uri('http://example.com:' . (Filter::MIN_PORT - 1));

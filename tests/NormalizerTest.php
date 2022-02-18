@@ -302,7 +302,7 @@ class NormalizerTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
-    public function decodeUnreservedCharactersDataProvider() : array
+    public function decodeUnreservedCharactersDataProvider(): array
     {
         $characters = $this->createUnreservedCharactersString();
         $percentEncodedCharacters = $this->percentEncodeString($characters);
