@@ -28,4 +28,4 @@ jobs:
         run: composer install --no-progress --prefer-dist --optimize-autoloader
 
       - name: Run PHPUnit unit tests
-        run: composer test-unit
+        run: composer test
