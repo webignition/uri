@@ -24,7 +24,6 @@
     "scripts": {
         "cs-phpcs": "./vendor/bin/phpcs",
         "cs": [
-            "@cs-fixer-dry-run",
             "@cs-phpcs"
         ],
         "test": "./vendor/bin/phpunit --colors=always",
