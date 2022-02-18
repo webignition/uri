@@ -28,9 +28,17 @@ class PunycodeEncoderTest extends \PHPUnit\Framework\TestCase
                 'value' => '♥',
                 'expectedValue' => 'xn--g6h',
             ],
+            'unicode with dots' => [
+                'value' => '♥.♥.♥',
+                'expectedValue' => 'xn--g6h.xn--g6h.xn--g6h',
+            ],
             'punycode' => [
                 'value' => 'xn--g6h',
                 'expectedValue' => 'xn--g6h',
+            ],
+            'punycode with dots' => [
+                'value' => 'xn--g6h.xn--g6h.xn--g6h',
+                'expectedValue' => 'xn--g6h.xn--g6h.xn--g6h',
             ],
         ];
     }
@@ -57,9 +65,17 @@ class PunycodeEncoderTest extends \PHPUnit\Framework\TestCase
                 'value' => '♥',
                 'expectedValue' => '♥',
             ],
+            'unicode with dots' => [
+                'value' => '♥.♥.♥',
+                'expectedValue' => '♥.♥.♥',
+            ],
             'punycode' => [
                 'value' => 'xn--g6h',
                 'expectedValue' => '♥',
+            ],
+            'punycode with dots' => [
+                'value' => 'xn--g6h.xn--g6h.xn--g6h',
+                'expectedValue' => '♥.♥.♥',
             ],
         ];
     }

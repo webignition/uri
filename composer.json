@@ -22,21 +22,24 @@
         }
     },
     "scripts": {
+        "cs-phpcs": "./vendor/bin/phpcs",
+        "cs": [
+            "@cs-phpcs"
+        ],
         "test": "./vendor/bin/phpunit --colors=always",
-        "cs": "./vendor/bin/phpcs src tests --colors --standard=PSR2",
         "ci": [
             "@composer cs",
             "@composer test"
         ]
     },
     "require": {
-        "php": ">=7.2",
+        "php": "^7.4|^8.0|^8.1",
         "psr/http-message": "^1",
-        "algo26-matthias/idna-convert": "^2",
+        "algo26-matthias/idna-convert": "^3.0",
         "hookedmedia/ip-utils": "^1.1"
     },
     "require-dev": {
-        "phpunit/phpunit": "^7",
+        "phpunit/phpunit": "^9.5",
         "squizlabs/php_codesniffer": "3.*",
         "mockery/mockery": "^1",
         "php-mock/php-mock-mockery": "^1"
