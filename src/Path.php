@@ -4,7 +4,7 @@ namespace webignition\Uri;
 
 class Path
 {
-    const PATH_PART_SEPARATOR = '/';
+    public const PATH_PART_SEPARATOR = '/';
 
     /**
      * @var string

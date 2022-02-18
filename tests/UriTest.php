@@ -1,5 +1,4 @@
 <?php
-/** @noinspection PhpDocSignatureInspection */
 
 namespace webignition\Uri\Tests;
 
@@ -8,13 +7,12 @@ use webignition\Uri\Uri;
 
 class UriTest extends \PHPUnit\Framework\TestCase
 {
-    const UNRESERVED_CHARACTERS = 'a-zA-Z0-9.-_~!$&\'()*+,;=:@';
-    const GEN_DELIMITERS = ':/?#[]@';
-    const SUB_DELIMITERS = '/!$&\'()*+,;=';
+    public const UNRESERVED_CHARACTERS = 'a-zA-Z0-9.-_~!$&\'()*+,;=:@';
+    public const GEN_DELIMITERS = ':/?#[]@';
+    public const SUB_DELIMITERS = '/!$&\'()*+,;=';
 
     public function testCreateWithInvalidPort()
     {
-        /** @noinspection PhpParamsInspection */
         $this->expectException(\InvalidArgumentException::class);
 
         new Uri('http://example.com:' . (Filter::MIN_PORT - 1));
