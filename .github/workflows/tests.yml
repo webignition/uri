@@ -1,0 +1,31 @@
+name: Tests
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  unit:
+    name: Unit tests - PHP ${{ matrix.php }}
+    strategy:
+      matrix:
+        operating-system: [ubuntu-latest]
+        php: ['7.4', '8.0', '8.1']
+    runs-on: ${{ matrix.operating-system }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup php
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+
+      - name: Install Composer dependencies
+        run: composer install --no-progress --prefer-dist --optimize-autoloader
+
+      - name: Run PHPUnit unit tests
+        run: composer test-unit
