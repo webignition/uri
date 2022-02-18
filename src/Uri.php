@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace webignition\Uri;
 
 use Psr\Http\Message\UriInterface;
@@ -31,6 +33,43 @@ class Uri implements UriInterface
         $userInfo = new UserInfo($user, $pass);
 
         self::applyComponents($this, $scheme, (string) $userInfo, $host, $port, $path, $query, $fragment);
+    }
+
+    public function __toString(): string
+    {
+        $uri = '';
+
+        if ('' !== $this->scheme) {
+            $uri .= $this->scheme . ':';
+        }
+
+        $authority = $this->getAuthority();
+
+        if ('' !== $authority || 'file' === $this->scheme) {
+            $uri .= '//' . $authority;
+        }
+
+        $path = $this->path;
+
+        if ($authority && $path && '/' !== $path[0]) {
+            $path = '/' . $path;
+        }
+
+        if ('' === $authority && preg_match('/^\/\//', $path)) {
+            $path = '/' . ltrim($path, '/');
+        }
+
+        $uri .= $path;
+
+        if ('' !== $this->query) {
+            $uri .= '?' . $this->query;
+        }
+
+        if ('' !== $this->fragment) {
+            $uri .= '#' . $this->fragment;
+        }
+
+        return $uri;
     }
 
     public static function compose(
@@ -248,43 +287,6 @@ class Uri implements UriInterface
             $this->query,
             $fragment
         );
-    }
-
-    public function __toString(): string
-    {
-        $uri = '';
-
-        if ('' !== $this->scheme) {
-            $uri .= $this->scheme . ':';
-        }
-
-        $authority = $this->getAuthority();
-
-        if ('' !== $authority || 'file' === $this->scheme) {
-            $uri .= '//' . $authority;
-        }
-
-        $path = $this->path;
-
-        if ($authority && $path && '/' !== $path[0]) {
-            $path = '/' . $path;
-        }
-
-        if ('' === $authority && preg_match('/^\/\//', $path)) {
-            $path = '/' . ltrim($path, '/');
-        }
-
-        $uri .= $path;
-
-        if ('' !== $this->query) {
-            $uri .= '?' . $this->query;
-        }
-
-        if ('' !== $this->fragment) {
-            $uri .= '#' . $this->fragment;
-        }
-
-        return $uri;
     }
 
     private static function applyComponents(

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace webignition\Uri;
 
 class DefaultPortIdentifier
@@ -8,7 +10,7 @@ class DefaultPortIdentifier
      * @var array<string, int>
      */
     private static array $schemeToPortMap = [
-        'http'  => 80,
+        'http' => 80,
         'https' => 443,
         'ftp' => 21,
         'gopher' => 70,

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace webignition\Uri;
 
 use Psr\Http\Message\UriInterface;
@@ -58,7 +60,7 @@ class Normalizer
         int $flags = self::PRESERVING_NORMALIZATIONS,
         array $options = []
     ): UriInterface {
-        if ($flags !== self::NONE) {
+        if (self::NONE !== $flags) {
             if ($flags & self::REMOVE_USER_INFO && '' !== $uri->getUserInfo()) {
                 $uri = $uri->withUserInfo('');
             }
@@ -129,7 +131,7 @@ class Normalizer
             }
 
             if (
-                $flags & self::CONVERT_EMPTY_HTTP_PATH && $uri->getPath() === ''
+                $flags & self::CONVERT_EMPTY_HTTP_PATH && '' === $uri->getPath()
                 && (self::SCHEME_HTTP === $uri->getScheme() || self::SCHEME_HTTPS === $uri->getScheme())
             ) {
                 $uri = $uri->withPath('/');
@@ -230,7 +232,7 @@ class Normalizer
 
         if ($pathHasLeadingSlash && $newPathLacksLeadingSlash) {
             $newPath = '/' . $newPath;
-        } elseif ($newPath !== '' && ('.' === $segment || '..' === $segment)) {
+        } elseif ('' !== $newPath && ('.' === $segment || '..' === $segment)) {
             $newPath .= '/';
         }
 
@@ -258,8 +260,9 @@ class Normalizer
         callable $callback
     ): UriInterface {
         return $uri
-                ->withPath((string) preg_replace_callback($regex, $callback, $uri->getPath()))
-                ->withQuery((string) preg_replace_callback($regex, $callback, $uri->getQuery()));
+            ->withPath((string) preg_replace_callback($regex, $callback, $uri->getPath()))
+            ->withQuery((string) preg_replace_callback($regex, $callback, $uri->getQuery()))
+        ;
     }
 
     /**
@@ -290,7 +293,7 @@ class Normalizer
             ? substr($keyValue, 0, $firstEqualsPosition)
             : $keyValue;
 
-        return preg_match($pattern, $key) === 0;
+        return 0 === preg_match($pattern, $key);
     }
 
     private static function mutateQuery(string $query, callable $mutator): string

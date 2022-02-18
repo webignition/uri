@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace webignition\Uri;
 
 use Psr\Http\Message\UriInterface;
@@ -47,11 +49,6 @@ class ScopeComparer
      *  - pass
      *  - query
      *  - fragment
-     *
-     * @param UriInterface $source
-     * @param UriInterface $comparator
-     *
-     * @return bool
      */
     public function isInScope(UriInterface $source, UriInterface $comparator): bool
     {
@@ -82,7 +79,7 @@ class ScopeComparer
 
     private function isSourceUrlSubstringOfComparatorUrl(string $source, string $comparator): bool
     {
-        return strpos($comparator, $source) === 0;
+        return 0 === strpos($comparator, $source);
     }
 
     private function areSchemesEquivalent(string $source, string $comparator): bool
@@ -128,6 +125,7 @@ class ScopeComparer
             ->withPort(null)
             ->withUserInfo('')
             ->withQuery('')
-            ->withFragment('');
+            ->withFragment('')
+        ;
     }
 }

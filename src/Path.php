@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace webignition\Uri;
 
 class Path
@@ -16,6 +18,11 @@ class Path
         $this->path = Filter::filterPath($path);
     }
 
+    public function __toString(): string
+    {
+        return $this->path;
+    }
+
     public function isRelative(): bool
     {
         return '' === $this->path
@@ -28,11 +35,6 @@ class Path
         return '' === $this->path
             ? false
             : self::PATH_PART_SEPARATOR === $this->path[0];
-    }
-
-    public function __toString(): string
-    {
-        return $this->path;
     }
 
     public function hasFilename(): bool

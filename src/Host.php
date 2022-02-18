@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace webignition\Uri;
 
 use IpUtils\Address\IPv4;
@@ -48,9 +50,6 @@ class Host
         self::UNROUTABLE_LIMITED_BROADCAST_RANGE
     ];
 
-    /**
-     * @var string
-     */
     private string $host;
 
     /**
@@ -101,27 +100,6 @@ class Host
     }
 
     /**
-     * @param string[] $parts
-     * @param string[] $exclusions
-     *
-     * @return string[]
-     */
-    private function excludeParts(array $parts, array $exclusions): array
-    {
-        $filteredParts = [];
-
-        foreach ($parts as $index => $part) {
-            if (!isset($exclusions[$index]) || $exclusions[$index] !== $part) {
-                $filteredParts[] = $part;
-            }
-        }
-
-        return $filteredParts;
-    }
-
-    /**
-     * @return bool
-     *
      * @throws InvalidExpressionException
      */
     public function isPubliclyRoutable(): bool
@@ -148,10 +126,25 @@ class Host
     }
 
     /**
-     * @param IPv4 $ip
+     * @param string[] $parts
+     * @param string[] $exclusions
      *
-     * @return bool
-     *
+     * @return string[]
+     */
+    private function excludeParts(array $parts, array $exclusions): array
+    {
+        $filteredParts = [];
+
+        foreach ($parts as $index => $part) {
+            if (!isset($exclusions[$index]) || $exclusions[$index] !== $part) {
+                $filteredParts[] = $part;
+            }
+        }
+
+        return $filteredParts;
+    }
+
+    /**
      * @throws InvalidExpressionException
      */
     private function isIpv4InUnroutableRange(IPv4 $ip): bool

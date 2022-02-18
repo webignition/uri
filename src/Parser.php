@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace webignition\Uri;
 
 class Parser
@@ -24,6 +26,7 @@ class Parser
      * Scheme names consist of a sequence of characters beginning with a
      * letter and followed by any combination of letters, digits, plus
      * ("+"), period ("."), or hyphen ("-").
+     *
      * @see https://tools.ietf.org/html/rfc3986#section-3.1
      */
     public const SCHEME_ONLY_URL_PATTERN = '/^[a-z][a-z0-9+\.-]+:\/\/$/i';
@@ -52,7 +55,7 @@ class Parser
         }
 
         if (isset($components[self::COMPONENT_PORT])) {
-            $components[self::COMPONENT_PORT] = (int)$components[self::COMPONENT_PORT];
+            $components[self::COMPONENT_PORT] = (int) $components[self::COMPONENT_PORT];
         }
 
         if (isset($components[self::COMPONENT_PATH]) && empty($components[self::COMPONENT_PATH])) {
@@ -72,7 +75,7 @@ class Parser
         //
         // Not clearly spec'd anywhere but is the default behaviour of Chrome
         // and FireFox
-        return str_replace(array("\t", "\r", "\n"), '', $url);
+        return str_replace(["\t", "\r", "\n"], '', $url);
     }
 
     /**
