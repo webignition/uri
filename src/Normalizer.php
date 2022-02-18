@@ -126,14 +126,17 @@ class Normalizer
                 );
             }
 
-            if ($flags & self::CONVERT_EMPTY_HTTP_PATH && $uri->getPath() === '' &&
-                (self::SCHEME_HTTP === $uri->getScheme() || self::SCHEME_HTTPS === $uri->getScheme())
+            if (
+                $flags & self::CONVERT_EMPTY_HTTP_PATH && $uri->getPath() === ''
+                && (self::SCHEME_HTTP === $uri->getScheme() || self::SCHEME_HTTPS === $uri->getScheme())
             ) {
                 $uri = $uri->withPath('/');
             }
 
-            if ($flags & self::REMOVE_DEFAULT_FILE_HOST &&
-                self::SCHEME_FILE === $uri->getScheme() && 'localhost' === $uri->getHost()) {
+            if (
+                $flags & self::REMOVE_DEFAULT_FILE_HOST
+                && self::SCHEME_FILE === $uri->getScheme() && 'localhost' === $uri->getHost()
+            ) {
                 $uri = $uri->withHost('');
             }
         }
@@ -145,8 +148,10 @@ class Normalizer
             ));
         }
 
-        if (isset($options[self::OPTION_REMOVE_QUERY_PARAMETERS_PATTERNS]) &&
-            is_array($options[self::OPTION_REMOVE_QUERY_PARAMETERS_PATTERNS])) {
+        if (
+            isset($options[self::OPTION_REMOVE_QUERY_PARAMETERS_PATTERNS])
+            && is_array($options[self::OPTION_REMOVE_QUERY_PARAMETERS_PATTERNS])
+        ) {
             $patterns = $options[self::OPTION_REMOVE_QUERY_PARAMETERS_PATTERNS];
 
             $query = self::mutateQuery($uri->getQuery(), function (array &$queryKeyValues) use ($patterns) {
