@@ -6,8 +6,8 @@ class UserInfo
 {
     public const USER_PASS_DELIMITER = ':';
 
-    private $user = '';
-    private $password = null;
+    private string $user;
+    private ?string $password;
 
     public function __construct(string $user, ?string $password)
     {
@@ -23,7 +23,7 @@ class UserInfo
         $user = '';
         $password = null;
 
-        if ($partCount) {
+        if (0 !== $partCount) {
             $user = $parts[0];
 
             if ($partCount > 1) {
@@ -32,7 +32,7 @@ class UserInfo
             }
         }
 
-        return new static($user, $password);
+        return new self($user, $password);
     }
 
     public function getUser(): string

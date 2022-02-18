@@ -27,7 +27,10 @@ class Host
     public const UNROUTABLE_FUTURE_USE_RANGE = '240.0.0.0/4';
     public const UNROUTABLE_LIMITED_BROADCAST_RANGE = '255.255.255.255/32';
 
-    private $unrouteableRanges = [
+    /**
+     * @var string[]
+     */
+    private array $unrouteableRanges = [
         self::UNROUTABLE_THIS_NETWORK_RANGE,
         self::UNROUTABLE_PRIVATE_USE_NETWORKS_10_RANGE,
         self::UNROUTABLE_LOOPBACK_RANGE,
@@ -48,12 +51,12 @@ class Host
     /**
      * @var string
      */
-    private $host = '';
+    private string $host;
 
     /**
-     * @var array
+     * @var string[]
      */
-    private $parts = null;
+    private array $parts;
 
     public function __construct(string $host)
     {
@@ -66,6 +69,9 @@ class Host
         return $this->host;
     }
 
+    /**
+     * @return string[]
+     */
     public function getParts(): array
     {
         return $this->parts;
@@ -76,6 +82,9 @@ class Host
         return (string) $this === (string) $comparator;
     }
 
+    /**
+     * @param string[] $excludedParts
+     */
     public function isEquivalentTo(Host $comparator, array $excludedParts = []): bool
     {
         $thisHost = new Host(PunycodeEncoder::encode((string) $this));
@@ -91,6 +100,12 @@ class Host
         return $thisParts === $comparatorParts;
     }
 
+    /**
+     * @param string[] $parts
+     * @param string[] $exclusions
+     *
+     * @return string[]
+     */
     private function excludeParts(array $parts, array $exclusions): array
     {
         $filteredParts = [];

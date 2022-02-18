@@ -28,6 +28,9 @@ class Parser
      */
     public const SCHEME_ONLY_URL_PATTERN = '/^[a-z][a-z0-9+\.-]+:\/\/$/i';
 
+    /**
+     * @return array<string, int|string>
+     */
     public static function parse(string $url): array
     {
         $url = self::normalizeWhitespace($url);
@@ -42,9 +45,7 @@ class Parser
             $components[self::COMPONENT_FRAGMENT] = '';
         }
 
-        $scheme = isset($components[self::COMPONENT_SCHEME])
-            ? $components[self::COMPONENT_SCHEME]
-            : null;
+        $scheme = $components[self::COMPONENT_SCHEME] ?? null;
 
         if (self::PROTOCOL_RELATIVE_DUMMY_SCHEME === $scheme) {
             unset($components[self::COMPONENT_SCHEME]);
@@ -71,11 +72,12 @@ class Parser
         //
         // Not clearly spec'd anywhere but is the default behaviour of Chrome
         // and FireFox
-        $url = str_replace(array("\t", "\r", "\n"), '', $url);
-
-        return $url;
+        return str_replace(array("\t", "\r", "\n"), '', $url);
     }
 
+    /**
+     * @return array<string, int|string>
+     */
     private static function parseComponents(string $url): array
     {
         $components = parse_url($url);
@@ -97,17 +99,23 @@ class Parser
         return [];
     }
 
+    /**
+     * @return array<string, string>
+     */
     private static function parseUrlWithOnlyScheme(string $url): array
     {
         if (preg_match(self::SCHEME_ONLY_URL_PATTERN, $url)) {
             return [
-                'scheme' => preg_replace('/:\/\/$/', '', $url),
+                'scheme' => (string) preg_replace('/:\/\/$/', '', $url),
             ];
         }
 
         return [];
     }
 
+    /**
+     * @return array<string, int|string>
+     */
     private static function parseUrlWithInvalidPort(string $url): array
     {
         $components = self::parseUrlWithInvalidPortWithPath($url);
@@ -133,6 +141,9 @@ class Parser
         return [];
     }
 
+    /**
+     * @return array<string, int|string>
+     */
     private static function parseUrlWithInvalidPortWithPath(string $url): array
     {
         $doubleSlashPosition = strpos($url, '//');
@@ -150,6 +161,9 @@ class Parser
         return self::parseUrlEndingWithPortPatternAndSuffix($url, $firstSlashPosition);
     }
 
+    /**
+     * @return array<string, int|string>
+     */
     private static function parseUrlWithInvalidPortWithoutPathWithQuery(string $url): array
     {
         $queryDelimiterPosition = strpos($url, self::QUERY_DELIMITER);
@@ -167,6 +181,9 @@ class Parser
         return self::parseUrlEndingWithPortPatternAndSuffix($url, $queryDelimiterPosition);
     }
 
+    /**
+     * @return array<string, int|string>
+     */
     private static function parseUrlWithInvalidPOrtWithoutPathWithoutQueryWithFragment(string $url): array
     {
         $fragmentDelimiterPosition = strpos($url, self::FRAGMENT_DELIMITER);
@@ -178,6 +195,9 @@ class Parser
         return self::parseUrlEndingWithPortPatternAndSuffix($url, $fragmentDelimiterPosition);
     }
 
+    /**
+     * @return array<string, int|string>
+     */
     private static function parseUrlEndingWithPortPatternAndSuffix(string $url, int $suffixPosition)
     {
         $urlEndingWithPortPattern = substr($url, 0, $suffixPosition);
@@ -186,8 +206,13 @@ class Parser
         return self::parseUrlEndingWithPortPattern($urlEndingWithPortPattern, $suffix);
     }
 
-    private static function parseUrlEndingWithPortPattern(string $urlEndingWithPortPattern, string $postPortSuffix = '')
-    {
+    /**
+     * @return array<string, int|string>
+     */
+    private static function parseUrlEndingWithPortPattern(
+        string $urlEndingWithPortPattern,
+        string $postPortSuffix = ''
+    ): array {
         $endsWithPortPattern = '/\:[0-9]+$/';
         $endsWithPortMatches = [];
 
@@ -198,6 +223,7 @@ class Parser
             $modifiedUrl .= $postPortSuffix;
 
             $components = parse_url($modifiedUrl);
+            $components = is_array($components) ? $components : [];
             $components[self::COMPONENT_PORT] = $port;
 
             return $components;

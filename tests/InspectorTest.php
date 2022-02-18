@@ -11,17 +11,15 @@ class InspectorTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @dataProvider isNotPubliclyRoutableDataProvider
-     *
-     * @param UriInterface $url
-     * @param bool $expectedIsPubliclyRoutable
-     *
-     * @throws InvalidExpressionException
      */
-    public function testIsNotPubliclyRoutable(UriInterface $url, bool $expectedIsPubliclyRoutable)
+    public function testIsNotPubliclyRoutable(UriInterface $url, bool $expectedIsPubliclyRoutable): void
     {
         $this->assertEquals($expectedIsPubliclyRoutable, Inspector::isNotPubliclyRoutable($url));
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function isNotPubliclyRoutableDataProvider(): array
     {
         return [
@@ -54,15 +52,15 @@ class InspectorTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @dataProvider isProtocolRelativeDataProvider
-     *
-     * @param UriInterface $uri
-     * @param bool $expectedIsProtocolRelative
      */
-    public function testIsProtocolRelative(UriInterface $uri, bool $expectedIsProtocolRelative)
+    public function testIsProtocolRelative(UriInterface $uri, bool $expectedIsProtocolRelative): void
     {
         $this->assertSame($expectedIsProtocolRelative, Inspector::isProtocolRelative($uri));
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function isProtocolRelativeDataProvider(): array
     {
         return [

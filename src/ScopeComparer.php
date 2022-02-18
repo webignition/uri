@@ -7,19 +7,19 @@ use Psr\Http\Message\UriInterface;
 class ScopeComparer
 {
     /**
-     * @var string[]
+     * @var array<string[]>
      */
-    private $equivalentSchemes = [];
+    private array $equivalentSchemes = [];
 
     /**
-     * @var string[]
+     * @var array<string[]>
      */
-    private $equivalentHosts = [];
+    private array $equivalentHosts = [];
 
     /**
      * @param string[] $schemes
      */
-    public function addEquivalentSchemes(array $schemes)
+    public function addEquivalentSchemes(array $schemes): void
     {
         $this->equivalentSchemes[] = $schemes;
     }
@@ -27,7 +27,7 @@ class ScopeComparer
     /**
      * @param string[] $hosts
      */
-    public function addEquivalentHosts(array $hosts)
+    public function addEquivalentHosts(array $hosts): void
     {
         $this->equivalentHosts[] = $hosts;
     }
@@ -95,6 +95,9 @@ class ScopeComparer
         return $this->areUrlPartsEquivalent($source, $comparator, $this->equivalentHosts);
     }
 
+    /**
+     * @param array<string[]> $equivalenceSets
+     */
     private function areUrlPartsEquivalent(string $sourceValue, string $comparatorValue, array $equivalenceSets): bool
     {
         if ($sourceValue === $comparatorValue) {
@@ -121,11 +124,10 @@ class ScopeComparer
 
     private function removeIgnoredComponents(UriInterface $uri): UriInterface
     {
-        $uri = $uri->withPort(null);
-        $uri = $uri->withUserInfo('');
-        $uri = $uri->withQuery('');
-        $uri = $uri->withFragment('');
-
-        return $uri;
+        return $uri
+            ->withPort(null)
+            ->withUserInfo('')
+            ->withQuery('')
+            ->withFragment('');
     }
 }

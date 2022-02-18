@@ -8,18 +8,17 @@ class UserInfoTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @dataProvider toStringDataProvider
-     *
-     * @param string $user
-     * @param string|null $password
-     * @param string $expectedString
      */
-    public function testToString(string $user, ?string $password, string $expectedString)
+    public function testToString(string $user, ?string $password, string $expectedString): void
     {
         $userInfo = new UserInfo($user, $password);
 
         $this->assertSame($expectedString, (string) $userInfo);
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function toStringDataProvider(): array
     {
         return [
@@ -48,13 +47,8 @@ class UserInfoTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @dataProvider fromStringDataProvider
-     *
-     * @param string $userInfoString
-     * @param string $expectedUser
-     * @param string|null $expectedPassword
-     *
      */
-    public function testFromString(string $userInfoString, string $expectedUser, ?string $expectedPassword)
+    public function testFromString(string $userInfoString, string $expectedUser, ?string $expectedPassword): void
     {
         $userInfo = UserInfo::fromString($userInfoString);
 
@@ -62,6 +56,9 @@ class UserInfoTest extends \PHPUnit\Framework\TestCase
         $this->assertSame($expectedPassword, $userInfo->getPassword());
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function fromStringDataProvider(): array
     {
         return [

@@ -11,16 +11,18 @@ class ParserTest extends \PHPUnit\Framework\TestCase
      * @dataProvider normalizeWhitespaceDataProvider
      * @dataProvider invalidPortDataProvider
      *
-     * @param string $url
-     * @param array $expectedComponents
+     * @param array<string, int|string> $expectedComponents
      */
-    public function testParse(string $url, array $expectedComponents)
+    public function testParse(string $url, array $expectedComponents): void
     {
         $components = Parser::parse($url);
 
         $this->assertEquals($expectedComponents, $components);
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function parseDataProvider(): array
     {
         return [
@@ -184,6 +186,9 @@ class ParserTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function normalizeWhitespaceDataProvider(): array
     {
         return [
@@ -264,6 +269,9 @@ class ParserTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function invalidPortDataProvider(): array
     {
         return [

@@ -10,15 +10,15 @@ class FilterTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @dataProvider filterPathDataProvider
-     *
-     * @param string $path
-     * @param string $expectedPath
      */
-    public function testFilterPath(string $path, string $expectedPath)
+    public function testFilterPath(string $path, string $expectedPath): void
     {
         $this->assertSame($expectedPath, Filter::filterPath($path));
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function filterPathDataProvider(): array
     {
         return [
@@ -67,15 +67,15 @@ class FilterTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @dataProvider filterQueryOrFragmentDataProvider
-     *
-     * @param string $queryOrFragment
-     * @param string $expectedQuery
      */
-    public function testFilterQueryOrFragment(string $queryOrFragment, string $expectedQuery)
+    public function testFilterQueryOrFragment(string $queryOrFragment, string $expectedQuery): void
     {
         $this->assertSame($expectedQuery, Filter::filterQueryOrFragment($queryOrFragment));
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function filterQueryOrFragmentDataProvider(): array
     {
         return [
@@ -116,15 +116,16 @@ class FilterTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @dataProvider filterPortInvalidPortDataProvider
-     *
-     * @param int $port
      */
-    public function testFilterPortInvalidPort(int $port)
+    public function testFilterPortInvalidPort(int $port): void
     {
         $this->expectException(\InvalidArgumentException::class);
         Filter::filterPort($port);
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function filterPortInvalidPortDataProvider(): array
     {
         return [
@@ -139,15 +140,15 @@ class FilterTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @dataProvider filterPortSuccessDataProvider
-     *
-     * @param $port
-     * @param int|null $expectedPort
      */
-    public function testFilterPortSuccess($port, ?int $expectedPort)
+    public function testFilterPortSuccess(?int $port, ?int $expectedPort): void
     {
         $this->assertSame($expectedPort, Filter::filterPort($port));
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function filterPortSuccessDataProvider(): array
     {
         return [
@@ -158,10 +159,6 @@ class FilterTest extends \PHPUnit\Framework\TestCase
             'int in range' => [
                 'port' => 8080,
                 'expectedPort' => 8080,
-            ],
-            'string in range' => [
-                'port' => '443',
-                'expectedPort' => 443,
             ],
         ];
     }

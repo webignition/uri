@@ -36,7 +36,7 @@ class Filter
 
     private static function pregReplaceCallbackRawUrlEncodeMatchZero(string $pattern, string $value): string
     {
-        return preg_replace_callback(
+        return (string) preg_replace_callback(
             $pattern,
             function (array $match) {
                 return rawurlencode($match[0]);
@@ -57,8 +57,6 @@ class Filter
         if (null === $port) {
             return null;
         }
-
-        $port = (int) $port;
 
         if (self::MIN_PORT > $port || self::MAX_PORT < $port) {
             throw new \InvalidArgumentException(

@@ -8,17 +8,17 @@ class PathTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @dataProvider createDataProvider
-     *
-     * @param string $path
-     * @param string $expectedPath
      */
-    public function testCreate(string $path, string $expectedPath)
+    public function testCreate(string $path, string $expectedPath): void
     {
         $path = new Path($path);
 
         $this->assertEquals($expectedPath, (string)$path);
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function createDataProvider(): array
     {
         return [
@@ -39,17 +39,17 @@ class PathTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @dataProvider isRelativeDataProvider
-     *
-     * @param string $pathString
-     * @param bool $expectedIsRelative
      */
-    public function testIsRelative(string $pathString, bool $expectedIsRelative)
+    public function testIsRelative(string $pathString, bool $expectedIsRelative): void
     {
         $path = new Path($pathString);
 
         $this->assertEquals($expectedIsRelative, $path->isRelative());
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function isRelativeDataProvider(): array
     {
         return [
@@ -70,17 +70,17 @@ class PathTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @dataProvider isAbsoluteDataProvider
-     *
-     * @param string $pathString
-     * @param bool $expectedIsAbsolute
      */
-    public function testIsAbsolute(string $pathString, bool $expectedIsAbsolute)
+    public function testIsAbsolute(string $pathString, bool $expectedIsAbsolute): void
     {
         $path = new Path($pathString);
 
         $this->assertEquals($expectedIsAbsolute, $path->isAbsolute());
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function isAbsoluteDataProvider(): array
     {
         return [
@@ -101,12 +101,6 @@ class PathTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @dataProvider filenameAndDirectoryPropertiesDataProvider
-     *
-     * @param string $pathString
-     * @param bool $expectedHasFilename
-     * @param string  $expectedFilename
-     * @param string $expectedDirectory
-     * @param bool $expectedHasTrailingSlash
      */
     public function testFilenameAndDirectoryProperties(
         string $pathString,
@@ -114,7 +108,7 @@ class PathTest extends \PHPUnit\Framework\TestCase
         string $expectedFilename,
         string $expectedDirectory,
         bool $expectedHasTrailingSlash
-    ) {
+    ): void {
         $path = new Path($pathString);
 
         $this->assertEquals($expectedHasFilename, $path->hasFilename());
@@ -123,6 +117,9 @@ class PathTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expectedHasTrailingSlash, $path->hasTrailingSlash());
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function filenameAndDirectoryPropertiesDataProvider(): array
     {
         return [
@@ -159,17 +156,17 @@ class PathTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @dataProvider hasTrailingSlashDataProvider
-     *
-     * @param string $pathString
-     * @param bool $expectedHasTrailingSlash
      */
-    public function testHasTrailingSlash(string $pathString, bool $expectedHasTrailingSlash)
+    public function testHasTrailingSlash(string $pathString, bool $expectedHasTrailingSlash): void
     {
         $path = new Path($pathString);
 
         $this->assertSame($expectedHasTrailingSlash, $path->hasTrailingSlash());
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function hasTrailingSlashDataProvider(): array
     {
         return [
