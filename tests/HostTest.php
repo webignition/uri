@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace webignition\Uri\Tests;
 
 use IpUtils\Exception\InvalidExpressionException;
@@ -14,7 +16,7 @@ class HostTest extends \PHPUnit\Framework\TestCase
     {
         $host = new Host($hostname);
 
-        $this->assertEquals($hostname, (string)$host);
+        $this->assertEquals($hostname, (string) $host);
     }
 
     /**
@@ -35,7 +37,7 @@ class HostTest extends \PHPUnit\Framework\TestCase
     /**
      * @dataProvider getPartsDataProvider
      *
-     * @param string[]|int[] $expectedParts
+     * @param int[]|string[] $expectedParts
      */
     public function testGetParts(string $hostname, array $expectedParts): void
     {
@@ -193,7 +195,7 @@ class HostTest extends \PHPUnit\Framework\TestCase
      * 203.0.113.0/24      TEST-NET-3                 RFC 5737
      * 224.0.0.0/4         Multicast                  RFC 3171
      * 240.0.0.0/4         Reserved for Future Use    RFC 1112, Section 4
-     * 255.255.255.255/32  Limited Broadcast          RFC 919, Section 7 RFC 922, Section 7
+     * 255.255.255.255/32  Limited Broadcast          RFC 919, Section 7 RFC 922, Section 7.
      *
      * @dataProvider ipRangeIsPubliclyRoutableDataProvider
      */
@@ -202,7 +204,7 @@ class HostTest extends \PHPUnit\Framework\TestCase
         $ipRangeSplit = explode('/', $ipRange);
 
         $startIp = $ipRangeSplit[0];
-        $cidrRange = (int)$ipRangeSplit[1];
+        $cidrRange = (int) $ipRangeSplit[1];
         $ipCount = 1 << (32 - $cidrRange);
 
         $firstIpInRange = (int) ip2long($startIp);
@@ -325,7 +327,7 @@ class HostTest extends \PHPUnit\Framework\TestCase
      */
     private function getRandomLongIpSubsetInRange(int $first, int $last, int $max = 32)
     {
-        $ips = array();
+        $ips = [];
 
         while (count($ips) < $max) {
             $ips[] = rand($first, $last);

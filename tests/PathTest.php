@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace webignition\Uri\Tests;
 
 use webignition\Uri\Path;
@@ -13,7 +15,7 @@ class PathTest extends \PHPUnit\Framework\TestCase
     {
         $path = new Path($path);
 
-        $this->assertEquals($expectedPath, (string)$path);
+        $this->assertEquals($expectedPath, (string) $path);
     }
 
     /**

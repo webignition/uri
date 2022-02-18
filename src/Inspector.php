@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace webignition\Uri;
 
 use IpUtils\Exception\InvalidExpressionException;
@@ -16,10 +18,6 @@ class Inspector
      * - having a host that is not publicly routable (such as a within a private IP range)
      * - having a hostname lacking dots
      * - having a hostname starting or ending with a dot
-     *
-     * @param UriInterface $url
-     *
-     * @return bool
      *
      * @throws InvalidExpressionException
      */

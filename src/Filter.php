@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace webignition\Uri;
 
 class Filter
@@ -34,24 +36,6 @@ class Filter
         return self::pregReplaceCallbackRawUrlEncodeMatchZero($pattern, $value);
     }
 
-    private static function pregReplaceCallbackRawUrlEncodeMatchZero(string $pattern, string $value): string
-    {
-        return (string) preg_replace_callback(
-            $pattern,
-            function (array $match) {
-                return rawurlencode($match[0]);
-            },
-            $value
-        );
-    }
-
-    /**
-     * @param int|null $port
-     * @param string $scheme
-     *
-     * @return int|null
-     *
-     */
     public static function filterPort(?int $port, string $scheme = ''): ?int
     {
         if (null === $port) {
@@ -69,5 +53,16 @@ class Filter
         }
 
         return $port;
+    }
+
+    private static function pregReplaceCallbackRawUrlEncodeMatchZero(string $pattern, string $value): string
+    {
+        return (string) preg_replace_callback(
+            $pattern,
+            function (array $match) {
+                return rawurlencode($match[0]);
+            },
+            $value
+        );
     }
 }

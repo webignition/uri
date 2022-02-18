@@ -1,8 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace webignition\Uri\Tests;
 
-use IpUtils\Exception\InvalidExpressionException;
 use Psr\Http\Message\UriInterface;
 use webignition\Uri\Inspector;
 use webignition\Uri\Uri;

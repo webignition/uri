@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace webignition\Uri;
 
 class UserInfo
@@ -13,6 +15,21 @@ class UserInfo
     {
         $this->user = $user;
         $this->password = $password;
+    }
+
+    public function __toString(): string
+    {
+        $userInfo = '';
+
+        if (!empty($this->user)) {
+            $userInfo .= $this->user;
+        }
+
+        if (!empty($this->password)) {
+            $userInfo .= self::USER_PASS_DELIMITER . $this->password;
+        }
+
+        return $userInfo;
     }
 
     public static function fromString(string $userInfo): UserInfo
@@ -43,20 +60,5 @@ class UserInfo
     public function getPassword(): ?string
     {
         return $this->password;
-    }
-
-    public function __toString(): string
-    {
-        $userInfo = '';
-
-        if (!empty($this->user)) {
-            $userInfo .= $this->user;
-        }
-
-        if (!empty($this->password)) {
-            $userInfo .=  self::USER_PASS_DELIMITER . $this->password;
-        }
-
-        return $userInfo;
     }
 }

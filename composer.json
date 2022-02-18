@@ -22,8 +22,11 @@
         }
     },
     "scripts": {
+        "cs-fixer-dry-run": "docker run --rm $(if [ ! -z \"${NO_TTY}\" ]; then echo \"\"; else echo \"-t\"; fi) -w=/app -v ${PWD}:/app oskarstark/php-cs-fixer-ga:latest --allow-risky=yes --dry-run --verbose --show-progress none",
+        "cs-fixer-fix": "docker run --rm $(if [ ! -z \"${NO_TTY}\" ]; then echo \"\"; else echo \"-t\"; fi) -w=/app -v ${PWD}:/app oskarstark/php-cs-fixer-ga:latest --allow-risky=yes --diff",
         "cs-phpcs": "./vendor/bin/phpcs",
         "cs": [
+            "@cs-fixer-dry-run",
             "@cs-phpcs"
         ],
         "static-analysis": "./vendor/bin/phpstan analyse --ansi",

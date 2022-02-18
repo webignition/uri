@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace webignition\Uri\Tests;
 
 use webignition\Uri\Parser;
@@ -174,13 +176,13 @@ class ParserTest extends \PHPUnit\Framework\TestCase
             'scheme-only (file_' => [
                 'url' => 'file://',
                 'expectedComponents' => [
-                    Parser::COMPONENT_SCHEME  => 'file',
+                    Parser::COMPONENT_SCHEME => 'file',
                 ],
             ],
             'scheme-only (http)' => [
                 'url' => 'http://',
                 'expectedComponents' => [
-                    Parser::COMPONENT_SCHEME  => 'http',
+                    Parser::COMPONENT_SCHEME => 'http',
                 ],
             ],
         ];
