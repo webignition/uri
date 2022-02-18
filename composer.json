@@ -36,7 +36,7 @@
     "require": {
         "php": "^7.4|^8.0|^8.1",
         "psr/http-message": "^1",
-        "algo26-matthias/idna-convert": "^2",
+        "algo26-matthias/idna-convert": "^3.0",
         "hookedmedia/ip-utils": "^1.1"
     },
     "require-dev": {
