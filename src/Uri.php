@@ -281,7 +281,7 @@ class Uri implements UriInterface
 
         $authority = $this->getAuthority();
 
-        if ('' !== $authority|| 'file' === $this->scheme) {
+        if ('' !== $authority || 'file' === $this->scheme) {
             $uri .= '//' . $authority;
         }
 
