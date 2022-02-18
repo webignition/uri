@@ -8,16 +8,15 @@ class DefaultPortIdentifierTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @dataProvider isDefaultPortDataProvider
-     *
-     * @param string|null $scheme
-     * @param int|null $port
-     * @param bool $expectedIsDefaultPort
      */
-    public function testIsDefaultPort(?string $scheme, ?int $port, bool $expectedIsDefaultPort)
+    public function testIsDefaultPort(?string $scheme, ?int $port, bool $expectedIsDefaultPort): void
     {
         $this->assertSame($expectedIsDefaultPort, DefaultPortIdentifier::isDefaultPort($scheme, $port));
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function isDefaultPortDataProvider(): array
     {
         return [

@@ -6,61 +6,40 @@ use Psr\Http\Message\UriInterface;
 
 class Uri implements UriInterface
 {
-    /**
-     * @var string
-     */
-    private $scheme = '';
-
-    /**
-     * @var string
-     */
-    private $userInfo = '';
-
-    /**
-     * @var string
-     */
-    private $host = '';
-
-    /**
-     * @var int|null
-     */
-    private $port = null;
-
-    /**
-     * @var string
-     */
-    private $path = '';
-
-    /**
-     * @var string
-     */
-    private $query = '';
-
-    /**
-     * @var string
-     */
-    private $fragment = '';
+    private string $scheme = '';
+    private string $userInfo = '';
+    private string $host = '';
+    private ?int $port = null;
+    private string $path = '';
+    private string $query = '';
+    private string $fragment = '';
 
     public function __construct(string $url)
     {
         $components = Parser::parse($url);
 
-        $scheme = $components[Parser::COMPONENT_SCHEME] ?? '';
-        $host = $components[Parser::COMPONENT_HOST] ?? '';
+        $scheme = (string) ($components[Parser::COMPONENT_SCHEME] ?? '');
+        $host = (string) ($components[Parser::COMPONENT_HOST] ?? '');
         $port = $components[Parser::COMPONENT_PORT] ?? null;
-        $path = $components[Parser::COMPONENT_PATH] ?? '';
-        $query = $components[Parser::COMPONENT_QUERY] ?? '';
-        $fragment = $components[Parser::COMPONENT_FRAGMENT] ?? '';
-        $user = $components[Parser::COMPONENT_USER] ?? '';
-        $pass = $components[Parser::COMPONENT_PASS] ?? '';
+        $port = is_int($port) ? $port : null;
+        $path = (string) ($components[Parser::COMPONENT_PATH] ?? '');
+        $query = (string) ($components[Parser::COMPONENT_QUERY] ?? '');
+        $fragment = (string) ($components[Parser::COMPONENT_FRAGMENT] ?? '');
+        $user = (string) ($components[Parser::COMPONENT_USER] ?? '');
+        $pass = (string) ($components[Parser::COMPONENT_PASS] ?? '');
 
         $userInfo = new UserInfo($user, $pass);
 
         self::applyComponents($this, $scheme, (string) $userInfo, $host, $port, $path, $query, $fragment);
     }
 
-    public static function compose(string $scheme, string $authority, string $path, string $query, string $fragment)
-    {
+    public static function compose(
+        string $scheme,
+        string $authority,
+        string $path,
+        string $query,
+        string $fragment
+    ): self {
         $uriString = '';
 
         if (!empty($scheme)) {
@@ -109,7 +88,7 @@ class Uri implements UriInterface
         return $this->host;
     }
 
-    public function getPort()
+    public function getPort(): ?int
     {
         return $this->port;
     }
@@ -124,12 +103,12 @@ class Uri implements UriInterface
         return $this->query;
     }
 
-    public function getFragment()
+    public function getFragment(): string
     {
         return $this->fragment;
     }
 
-    public function withScheme($scheme)
+    public function withScheme($scheme): self
     {
         $scheme = trim(strtolower($scheme));
 
@@ -149,7 +128,7 @@ class Uri implements UriInterface
         );
     }
 
-    public function withUserInfo($user, $password = null)
+    public function withUserInfo($user, $password = null): self
     {
         $userInfo = (string) (new UserInfo($user, $password));
 
@@ -169,7 +148,7 @@ class Uri implements UriInterface
         );
     }
 
-    public function withHost($host)
+    public function withHost($host): self
     {
         $host = trim(strtolower($host));
 
@@ -189,7 +168,7 @@ class Uri implements UriInterface
         );
     }
 
-    public function withPort($port)
+    public function withPort($port): self
     {
         if (null !== $port) {
             $port = (int) $port;
@@ -211,7 +190,7 @@ class Uri implements UriInterface
         );
     }
 
-    public function withPath($path)
+    public function withPath($path): self
     {
         $path = Filter::filterPath($path);
 
@@ -231,7 +210,7 @@ class Uri implements UriInterface
         );
     }
 
-    public function withQuery($query)
+    public function withQuery($query): self
     {
         $query = Filter::filterQueryOrFragment($query);
 
@@ -251,7 +230,7 @@ class Uri implements UriInterface
         );
     }
 
-    public function withFragment($fragment)
+    public function withFragment($fragment): self
     {
         $fragment = Filter::filterQueryOrFragment($fragment);
 
@@ -271,7 +250,7 @@ class Uri implements UriInterface
         );
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         $uri = '';
 
@@ -317,7 +296,7 @@ class Uri implements UriInterface
         string $path,
         string $query,
         string $fragment
-    ): UriInterface {
+    ): self {
         $url->scheme = strtolower($scheme);
         $url->userInfo = $userInfo;
         $url->host = strtolower($host);

@@ -9,16 +9,17 @@ class HostTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @dataProvider createDataProvider
-     *
-     * @param string $hostname
      */
-    public function testCreate(string $hostname)
+    public function testCreate(string $hostname): void
     {
         $host = new Host($hostname);
 
         $this->assertEquals($hostname, (string)$host);
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function createDataProvider(): array
     {
         return [
@@ -34,16 +35,18 @@ class HostTest extends \PHPUnit\Framework\TestCase
     /**
      * @dataProvider getPartsDataProvider
      *
-     * @param string $hostname
      * @param string[]|int[] $expectedParts
      */
-    public function testGetParts(string $hostname, array $expectedParts)
+    public function testGetParts(string $hostname, array $expectedParts): void
     {
         $host = new Host($hostname);
 
         $this->assertEquals($expectedParts, $host->getParts());
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function getPartsDataProvider(): array
     {
         return [
@@ -82,12 +85,8 @@ class HostTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @dataProvider equalsDataProvider
-     *
-     * @param string $hostname
-     * @param string $comparatorHostname
-     * @param bool $expectedEquals
      */
-    public function testEquals(string $hostname, string $comparatorHostname, bool $expectedEquals)
+    public function testEquals(string $hostname, string $comparatorHostname, bool $expectedEquals): void
     {
         $host = new Host($hostname);
         $comparator = new Host($comparatorHostname);
@@ -96,6 +95,9 @@ class HostTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expectedEquals, $comparator->equals($host));
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function equalsDataProvider(): array
     {
         return [
@@ -115,23 +117,23 @@ class HostTest extends \PHPUnit\Framework\TestCase
     /**
      * @dataProvider isEquivalentToDataProvider
      *
-     * @param string $hostname
-     * @param string $comparatorHostname
      * @param string[] $excludeParts
-     * @param bool $expectedIsEquivalentTo
      */
     public function testIsEquivalentTo(
         string $hostname,
         string $comparatorHostname,
         array $excludeParts,
         bool $expectedIsEquivalentTo
-    ) {
+    ): void {
         $host = new Host($hostname);
         $comparator = new Host($comparatorHostname);
 
         $this->assertEquals($expectedIsEquivalentTo, $host->isEquivalentTo($comparator, $excludeParts));
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function isEquivalentToDataProvider(): array
     {
         return [
@@ -194,13 +196,8 @@ class HostTest extends \PHPUnit\Framework\TestCase
      * 255.255.255.255/32  Limited Broadcast          RFC 919, Section 7 RFC 922, Section 7
      *
      * @dataProvider ipRangeIsPubliclyRoutableDataProvider
-     *
-     * @param string $ipRange
-     * @param bool $expectedIsPubliclyRoutable
-     *
-     * @throws InvalidExpressionException
      */
-    public function testIpRangeIsPubliclyRoutable(string $ipRange, bool $expectedIsPubliclyRoutable)
+    public function testIpRangeIsPubliclyRoutable(string $ipRange, bool $expectedIsPubliclyRoutable): void
     {
         $ipRangeSplit = explode('/', $ipRange);
 
@@ -208,7 +205,7 @@ class HostTest extends \PHPUnit\Framework\TestCase
         $cidrRange = (int)$ipRangeSplit[1];
         $ipCount = 1 << (32 - $cidrRange);
 
-        $firstIpInRange = ip2long($startIp);
+        $firstIpInRange = (int) ip2long($startIp);
         $lastIpInRange = $firstIpInRange + $ipCount - 1;
 
         $ipsToTest = array_merge(
@@ -220,7 +217,7 @@ class HostTest extends \PHPUnit\Framework\TestCase
         );
 
         foreach ($ipsToTest as $longIp) {
-            $host = new Host(long2ip($longIp));
+            $host = new Host((string) long2ip($longIp));
 
             $this->assertEquals($expectedIsPubliclyRoutable, $host->isPubliclyRoutable());
         }
@@ -229,7 +226,7 @@ class HostTest extends \PHPUnit\Framework\TestCase
     /**
      * @throws InvalidExpressionException
      */
-    public function testLoopbackIpIsNotPubliclyRoutable()
+    public function testLoopbackIpIsNotPubliclyRoutable(): void
     {
         $host = new Host('127.0.0.1');
 
@@ -239,13 +236,16 @@ class HostTest extends \PHPUnit\Framework\TestCase
     /**
      * @throws InvalidExpressionException
      */
-    public function testDomainNameIsPubliclyRoutable()
+    public function testDomainNameIsPubliclyRoutable(): void
     {
         $host = new Host('foo');
 
         $this->assertTrue($host->isPubliclyRoutable());
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function ipRangeIsPubliclyRoutableDataProvider(): array
     {
         return [
@@ -321,11 +321,7 @@ class HostTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @param int $first
-     * @param int $last
-     * @param int $max
-     *
-     * @return array
+     * @return int[]
      */
     private function getRandomLongIpSubsetInRange(int $first, int $last, int $max = 32)
     {

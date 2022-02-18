@@ -11,11 +11,8 @@ class ScopeComparerTest extends \PHPUnit\Framework\TestCase
     /**
      * @dataProvider isInScopeDataProvider
      *
-     * @param UriInterface $sourceUrl
-     * @param UriInterface $comparatorUrl
-     * @param array $equivalentSchemeSets
-     * @param array $equivalentHostSets
-     * @param bool $expectedIsInScope
+     * @param array<string[]> $equivalentSchemeSets
+     * @param array<string[]> $equivalentHostSets
      */
     public function testIsInScope(
         UriInterface $sourceUrl,
@@ -23,7 +20,7 @@ class ScopeComparerTest extends \PHPUnit\Framework\TestCase
         array $equivalentSchemeSets,
         array $equivalentHostSets,
         bool $expectedIsInScope
-    ) {
+    ): void {
         $scopeComparer = new ScopeComparer();
 
         if (!empty($equivalentSchemeSets)) {
@@ -41,6 +38,9 @@ class ScopeComparerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expectedIsInScope, $scopeComparer->isInScope($sourceUrl, $comparatorUrl));
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function isInScopeDataProvider(): array
     {
         return [

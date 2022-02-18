@@ -26,6 +26,7 @@
         "cs": [
             "@cs-phpcs"
         ],
+        "static-analysis": "./vendor/bin/phpstan analyse --ansi",
         "test": "./vendor/bin/phpunit --colors=always",
         "ci": [
             "@composer cs",
@@ -42,6 +43,7 @@
         "phpunit/phpunit": "^9.5",
         "squizlabs/php_codesniffer": "^3.6",
         "mockery/mockery": "^1",
-        "php-mock/php-mock-mockery": "^1"
+        "php-mock/php-mock-mockery": "^1",
+        "phpstan/phpstan": "^1.4"
     }
 }

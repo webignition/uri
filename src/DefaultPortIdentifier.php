@@ -4,7 +4,10 @@ namespace webignition\Uri;
 
 class DefaultPortIdentifier
 {
-    private static $schemeToPortMap = [
+    /**
+     * @var array<string, int>
+     */
+    private static array $schemeToPortMap = [
         'http'  => 80,
         'https' => 443,
         'ftp' => 21,

@@ -50,10 +50,13 @@ class Normalizer
     public const HOST_STARTS_WITH_WWW_PATTERN = '/^www\./';
     public const REMOVE_INDEX_FILE_PATTERN = '/^index\.[a-z]+$/i';
 
+    /**
+     * @param array<string, mixed> $options
+     */
     public static function normalize(
         UriInterface $uri,
         int $flags = self::PRESERVING_NORMALIZATIONS,
-        ?array $options = []
+        array $options = []
     ): UriInterface {
         if ($flags !== self::NONE) {
             if ($flags & self::REMOVE_USER_INFO && '' !== $uri->getUserInfo()) {
@@ -64,16 +67,15 @@ class Normalizer
                 $uri = $uri->withFragment('');
             }
 
-            if ('' !== $uri->getHost()) {
-                $host = $uri->getHost();
-
+            $host = $uri->getHost();
+            if ('' !== $host) {
                 if ($flags & self::CONVERT_HOST_UNICODE_TO_PUNYCODE) {
                     $host = PunycodeEncoder::encode($host);
                 }
 
                 if ($flags & self::REMOVE_WWW) {
                     if (preg_match(self::HOST_STARTS_WITH_WWW_PATTERN, $host) > 0) {
-                        $host = preg_replace(self::HOST_STARTS_WITH_WWW_PATTERN, '', $host);
+                        $host = (string) preg_replace(self::HOST_STARTS_WITH_WWW_PATTERN, '', $host);
                     }
                 }
 
@@ -85,7 +87,7 @@ class Normalizer
             }
 
             if ($flags & self::REDUCE_DUPLICATE_PATH_SLASHES) {
-                $uri->withPath(preg_replace('#//++#', '/', $uri->getPath()));
+                $uri->withPath((string) preg_replace('#//++#', '/', $uri->getPath()));
             }
 
             if ($flags & self::ADD_PATH_TRAILING_SLASH) {
@@ -142,10 +144,10 @@ class Normalizer
         }
 
         if (isset($options[self::OPTION_REMOVE_PATH_FILES_PATTERNS])) {
-            $uri = $uri->withPath(self::removePathFiles(
-                $uri->getPath(),
-                $options[self::OPTION_REMOVE_PATH_FILES_PATTERNS]
-            ));
+            $patterns = $options[self::OPTION_REMOVE_PATH_FILES_PATTERNS];
+            $patterns = is_array($patterns) ? $patterns : [];
+
+            $uri = $uri->withPath(self::removePathFiles($uri->getPath(), $patterns));
         }
 
         if (
@@ -168,6 +170,9 @@ class Normalizer
         return $uri;
     }
 
+    /**
+     * @param string[] $patterns
+     */
     private static function removePathFiles(string $path, array $patterns): string
     {
         if ('' === $path) {
@@ -252,14 +257,17 @@ class Normalizer
         string $regex,
         callable $callback
     ): UriInterface {
-        return
-            $uri->withPath(
-                preg_replace_callback($regex, $callback, $uri->getPath())
-            )->withQuery(
-                preg_replace_callback($regex, $callback, $uri->getQuery())
-            );
+        return $uri
+                ->withPath((string) preg_replace_callback($regex, $callback, $uri->getPath()))
+                ->withQuery((string) preg_replace_callback($regex, $callback, $uri->getQuery()));
     }
 
+    /**
+     * @param string[] $queryKeyValues
+     * @param string[] $patterns
+     *
+     * @return string[]
+     */
     private static function removeQueryParameters(array $queryKeyValues, array $patterns): array
     {
         foreach ($patterns as $pattern) {

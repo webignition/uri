@@ -28,22 +28,22 @@ class NormalizerTest extends \PHPUnit\Framework\TestCase
      * @dataProvider removeQueryParametersDataProvider
      * @dataProvider defaultsDataProvider
      *
-     * @param string $url
-     * @param int $flags
-     * @param array $options
-     * @param string $expectedUrl
+     * @param array<string, mixed> $options
      */
     public function testNormalize(
         string $url,
         string $expectedUrl,
         int $flags = Normalizer::PRESERVING_NORMALIZATIONS,
-        ?array $options = []
-    ) {
+        array $options = []
+    ): void {
         $normalizedUrl = Normalizer::normalize(new Uri($url), $flags, $options);
 
-        $this->assertEquals((string) $expectedUrl, (string) $normalizedUrl);
+        $this->assertEquals($expectedUrl, (string) $normalizedUrl);
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function removeUserInfoDataProvider(): array
     {
         return [
@@ -60,6 +60,9 @@ class NormalizerTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function hostNormalizationDataProvider(): array
     {
         return [
@@ -81,6 +84,9 @@ class NormalizerTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function removeFragmentDataProvider(): array
     {
         return [
@@ -97,6 +103,9 @@ class NormalizerTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function removeWwwDataProvider(): array
     {
         return [
@@ -113,6 +122,9 @@ class NormalizerTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function removePathFilesDataProvider(): array
     {
         $patterns = [
@@ -163,6 +175,9 @@ class NormalizerTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function removePathDotSegmentsDataProvider(): array
     {
         return [
@@ -229,6 +244,9 @@ class NormalizerTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function addTrailingSlashDataProvider(): array
     {
         return [
@@ -260,6 +278,9 @@ class NormalizerTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function sortQueryParametersDataProvider(): array
     {
         return [
@@ -281,6 +302,9 @@ class NormalizerTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function reduceDuplicatePathSlashesDataProvider(): array
     {
         return [
@@ -302,6 +326,9 @@ class NormalizerTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function decodeUnreservedCharactersDataProvider(): array
     {
         $characters = $this->createUnreservedCharactersString();
@@ -316,6 +343,9 @@ class NormalizerTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function removeDefaultPortDataProvider(): array
     {
         return [
@@ -332,6 +362,9 @@ class NormalizerTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function capitalizePercentEncodingDataProvider(): array
     {
         $characters = $this->createUnreservedCharactersString();
@@ -351,6 +384,9 @@ class NormalizerTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function convertEmptyHttpPathDataProvider(): array
     {
         return [
@@ -367,6 +403,9 @@ class NormalizerTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function removeDefaultFileHostDataProvider(): array
     {
         return [
@@ -378,6 +417,9 @@ class NormalizerTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function removeQueryParametersDataProvider(): array
     {
         $url = 'http://example.com/?foo=bar&fizz=buzz&foobar&fizzbuzz';
@@ -432,6 +474,9 @@ class NormalizerTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function defaultsDataProvider(): array
     {
         $unreservedCharacters = $this->createUnreservedCharactersString();
