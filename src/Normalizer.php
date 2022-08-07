@@ -89,7 +89,7 @@ class Normalizer
             }
 
             if ($flags & self::REDUCE_DUPLICATE_PATH_SLASHES) {
-                $uri = $uri->withPath(preg_replace('#//++#', '/', $uri->getPath()));
+                $uri = $uri->withPath((string) preg_replace('#//++#', '/', $uri->getPath()));
             }
 
             if ($flags & self::ADD_PATH_TRAILING_SLASH) {
