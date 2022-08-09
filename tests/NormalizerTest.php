@@ -322,7 +322,7 @@ class NormalizerTest extends \PHPUnit\Framework\TestCase
             ],
             'reduceDuplicatePathSlashes: has duplicate slashes' => [
                 'url' => 'http://example.com//path//',
-                'expectedUrl' => 'http://example.com//path//',
+                'expectedUrl' => 'http://example.com/path/',
                 'flags' => Normalizer::REDUCE_DUPLICATE_PATH_SLASHES,
             ],
         ];
