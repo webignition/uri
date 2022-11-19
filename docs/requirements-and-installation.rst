@@ -17,4 +17,4 @@ Installation
 
 .. code-block:: bash
 
-    composer require webignition/uri ^1
+    composer require webignition/uri
