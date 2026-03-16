@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace webignition\Uri\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\UriInterface;
 use webignition\Uri\Inspector;
 use webignition\Uri\Uri;
 
-class InspectorTest extends \PHPUnit\Framework\TestCase
+class InspectorTest extends TestCase
 {
     /**
      * @dataProvider isNotPubliclyRoutableDataProvider

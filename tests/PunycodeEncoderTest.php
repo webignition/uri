@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace webignition\Uri\Tests;
 
+use PHPUnit\Framework\TestCase;
 use webignition\Uri\PunycodeEncoder;
 
-class PunycodeEncoderTest extends \PHPUnit\Framework\TestCase
+class PunycodeEncoderTest extends TestCase
 {
     /**
      * @dataProvider encodeDataProvider

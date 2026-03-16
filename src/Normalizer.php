@@ -19,14 +19,14 @@ class Normalizer
     public const OPTION_REMOVE_PATH_FILES_PATTERNS = 'remove-path-files-patterns';
     public const OPTION_REMOVE_QUERY_PARAMETERS_PATTERNS = 'remove-query-parameters-patterns';
 
-    public const PRESERVING_NORMALIZATIONS =
-        self::CAPITALIZE_PERCENT_ENCODING |
-        self::DECODE_UNRESERVED_CHARACTERS |
-        self::CONVERT_EMPTY_HTTP_PATH |
-        self::REMOVE_DEFAULT_FILE_HOST |
-        self::REMOVE_DEFAULT_PORT |
-        self::REMOVE_PATH_DOT_SEGMENTS |
-        self::CONVERT_HOST_UNICODE_TO_PUNYCODE;
+    public const PRESERVING_NORMALIZATIONS
+        = self::CAPITALIZE_PERCENT_ENCODING
+        | self::DECODE_UNRESERVED_CHARACTERS
+        | self::CONVERT_EMPTY_HTTP_PATH
+        | self::REMOVE_DEFAULT_FILE_HOST
+        | self::REMOVE_DEFAULT_PORT
+        | self::REMOVE_PATH_DOT_SEGMENTS
+        | self::CONVERT_HOST_UNICODE_TO_PUNYCODE;
 
     // Semantically-lossless normalizations
     public const CAPITALIZE_PERCENT_ENCODING = 1;

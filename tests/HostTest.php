@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace webignition\Uri\Tests;
 
 use IpUtils\Exception\InvalidExpressionException;
+use PHPUnit\Framework\TestCase;
 use webignition\Uri\Host;
 
-class HostTest extends \PHPUnit\Framework\TestCase
+class HostTest extends TestCase
 {
     /**
      * @dataProvider createDataProvider
@@ -226,26 +227,6 @@ class HostTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @throws InvalidExpressionException
-     */
-    public function testLoopbackIpIsNotPubliclyRoutable(): void
-    {
-        $host = new Host('127.0.0.1');
-
-        $this->assertFalse($host->isPubliclyRoutable());
-    }
-
-    /**
-     * @throws InvalidExpressionException
-     */
-    public function testDomainNameIsPubliclyRoutable(): void
-    {
-        $host = new Host('foo');
-
-        $this->assertTrue($host->isPubliclyRoutable());
-    }
-
-    /**
      * @return array<mixed>
      */
     public function ipRangeIsPubliclyRoutableDataProvider(): array
@@ -320,6 +301,26 @@ class HostTest extends \PHPUnit\Framework\TestCase
                 'expectedIsPubliclyRoutable' => false,
             ],
         ];
+    }
+
+    /**
+     * @throws InvalidExpressionException
+     */
+    public function testLoopbackIpIsNotPubliclyRoutable(): void
+    {
+        $host = new Host('127.0.0.1');
+
+        $this->assertFalse($host->isPubliclyRoutable());
+    }
+
+    /**
+     * @throws InvalidExpressionException
+     */
+    public function testDomainNameIsPubliclyRoutable(): void
+    {
+        $host = new Host('foo');
+
+        $this->assertTrue($host->isPubliclyRoutable());
     }
 
     /**
