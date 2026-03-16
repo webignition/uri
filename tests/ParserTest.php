@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace webignition\Uri\Tests;
 
+use PHPUnit\Framework\TestCase;
 use webignition\Uri\Parser;
 
-class ParserTest extends \PHPUnit\Framework\TestCase
+class ParserTest extends TestCase
 {
     /**
      * @dataProvider parseDataProvider

@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace webignition\Uri\Tests;
 
+use PHPUnit\Framework\TestCase;
 use webignition\Uri\DefaultPortIdentifier;
 
-class DefaultPortIdentifierTest extends \PHPUnit\Framework\TestCase
+class DefaultPortIdentifierTest extends TestCase
 {
     /**
      * @dataProvider isDefaultPortDataProvider

@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace webignition\Uri\Tests;
 
+use PHPUnit\Framework\TestCase;
 use webignition\Uri\UserInfo;
 
-class UserInfoTest extends \PHPUnit\Framework\TestCase
+class UserInfoTest extends TestCase
 {
     /**
      * @dataProvider toStringDataProvider

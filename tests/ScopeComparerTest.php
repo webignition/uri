@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace webignition\Uri\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\UriInterface;
 use webignition\Uri\ScopeComparer;
 use webignition\Uri\Uri;
 
-class ScopeComparerTest extends \PHPUnit\Framework\TestCase
+class ScopeComparerTest extends TestCase
 {
     /**
      * @dataProvider isInScopeDataProvider

@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace webignition\Uri\Tests;
 
+use PHPUnit\Framework\TestCase;
 use webignition\Uri\Normalizer;
 use webignition\Uri\Uri;
 
-class NormalizerTest extends \PHPUnit\Framework\TestCase
+class NormalizerTest extends TestCase
 {
     public const ALPHA_CHARACTERS = 'abcdefghijklmnopqrstuvwxyz';
     public const NUMERIC_CHARACTERS = '0123456789';
@@ -389,25 +390,6 @@ class NormalizerTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array<mixed>
      */
-    public function convertEmptyHttpPathDataProvider(): array
-    {
-        return [
-            'convertEmptyHttpPath: http' => [
-                'url' => 'http://example.com',
-                'expectedUrl' => 'http://example.com/',
-                'flags' => Normalizer::CONVERT_EMPTY_HTTP_PATH,
-            ],
-            'convertEmptyHttpPath: https' => [
-                'url' => 'https://example.com',
-                'expectedUrl' => 'https://example.com/',
-                'flags' => Normalizer::CONVERT_EMPTY_HTTP_PATH,
-            ],
-        ];
-    }
-
-    /**
-     * @return array<mixed>
-     */
     public function removeDefaultFileHostDataProvider(): array
     {
         return [
@@ -552,6 +534,25 @@ class NormalizerTest extends \PHPUnit\Framework\TestCase
             'default: file localhost is removed' => [
                 'url' => 'file://localhost/path',
                 'expectedUrl' => 'file:///path',
+            ],
+        ];
+    }
+
+    /**
+     * @return array<mixed>
+     */
+    public function convertEmptyHttpPathDataProvider(): array
+    {
+        return [
+            'convertEmptyHttpPath: http' => [
+                'url' => 'http://example.com',
+                'expectedUrl' => 'http://example.com/',
+                'flags' => Normalizer::CONVERT_EMPTY_HTTP_PATH,
+            ],
+            'convertEmptyHttpPath: https' => [
+                'url' => 'https://example.com',
+                'expectedUrl' => 'https://example.com/',
+                'flags' => Normalizer::CONVERT_EMPTY_HTTP_PATH,
             ],
         ];
     }

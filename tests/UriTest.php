@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace webignition\Uri\Tests;
 
+use PHPUnit\Framework\TestCase;
 use webignition\Uri\Filter;
 use webignition\Uri\Uri;
 
-class UriTest extends \PHPUnit\Framework\TestCase
+class UriTest extends TestCase
 {
     public const UNRESERVED_CHARACTERS = 'a-zA-Z0-9.-_~!$&\'()*+,;=:@';
     public const GEN_DELIMITERS = ':/?#[]@';
@@ -376,7 +377,7 @@ class UriTest extends \PHPUnit\Framework\TestCase
         $this->assertSame(8080, $httpUriWithNonDefaultPort->getPort());
 
         $httpUriWithSameNonDefaultPort = $httpUriWithNonDefaultPort->withPort(8080);
-        $this->assertSame($httpUriWithNonDefaultPort, $httpUriWithSameNonDefaultPort);
+        $this->assertEquals($httpUriWithNonDefaultPort, $httpUriWithSameNonDefaultPort);
 
         $httpUriWithPortRemoved = $httpUriWithNonDefaultPort->withPort(null);
         $this->assertNull($httpUriWithPortRemoved->getPort());
