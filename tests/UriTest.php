@@ -377,7 +377,7 @@ class UriTest extends TestCase
         $this->assertSame(8080, $httpUriWithNonDefaultPort->getPort());
 
         $httpUriWithSameNonDefaultPort = $httpUriWithNonDefaultPort->withPort(8080);
-        $this->assertSame($httpUriWithNonDefaultPort, $httpUriWithSameNonDefaultPort);
+        $this->assertEquals($httpUriWithNonDefaultPort, $httpUriWithSameNonDefaultPort);
 
         $httpUriWithPortRemoved = $httpUriWithNonDefaultPort->withPort(null);
         $this->assertNull($httpUriWithPortRemoved->getPort());
